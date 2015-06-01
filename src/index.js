@@ -1,8 +1,8 @@
 import request from 'superagent';
 require('es6-promise').polyfill();
 
-const ROOT = 'https://pact-core.herokuapp.com';
-const USERS = `${ROOT}/users`;
+const CORE = 'https://pact-core.herokuapp.com';
+const USERS = `${CORE}/users`;
 
 function _get(url, callback) {
   request
