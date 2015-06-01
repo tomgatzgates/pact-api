@@ -3,6 +3,13 @@ PactAPI
 
 > A JS wrapper around Pact's APIs to make it faster and easier to use in client/server JS projects.
 
+
+Available Methods
+=================
+
+- `getOrders(:userId)`
+
+
 Core APIs
 ---------
 
