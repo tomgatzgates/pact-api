@@ -1,6 +1,6 @@
 {
   "name": "pact-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "JavaScript wrapper around Pact's APIs for server & browser.",
   "main": "dist/PactAPI.js",
   "scripts": {
