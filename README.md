@@ -24,15 +24,15 @@ Available Methods
 - `getOrders(:userId)`
 
 
-Core APIs
----------
+Core API docs
+-------------
 
 1. Hit http://petstore.swagger.io
 1. Enter `https://pact-core.herokuapp.com/v1/api_docs` into the input
 1. View docs
 
-PactApp APIs
-------------
+PactApp API docs
+----------------
 
 Umm...
 
