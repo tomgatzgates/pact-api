@@ -2,16 +2,20 @@
   "name": "pact-api",
   "version": "1.1.0",
   "description": "JavaScript wrapper around Pact's APIs for server & browser.",
-  "main": "dist/pact-api.js",
+  "author": "Iestyn Williams <iest@me.com>",
+  "main": "dist/PactAPI.js",
   "scripts": {
-    "build": "babel src/pact-api.js > dist/pact-api.js"
+    "build": "babel src/PactAPI.js > dist/PactAPI.js",
+    "test": "echo \"Error: TODO! :)\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:PactCoffee/pact-api.git"
   },
+  "devDependancies": {
+    "babel": "^5.5.8"
+  },
   "dependencies": {
-    "babel": "^5.5.8",
     "es6-promise": "^2.3.0",
     "superagent": "^1.2.0"
   }
