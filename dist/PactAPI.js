@@ -1,7 +1,3 @@
-// Change to instance-based
-// Then export the instance
-// Different instance on client vs server
-
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -28,15 +24,16 @@ require('es6-promise').polyfill();
 
 var PactAPI = (function () {
   function PactAPI(_ref) {
-    var host = _ref.host;
+    var base = _ref.base;
     var token = _ref.token;
 
     _classCallCheck(this, PactAPI);
 
     this.token = token;
     this.endpoints = {
-      USERS: '' + host + '/users',
-      LOGIN: '' + host + '/auth/login'
+      USERS: '' + base + '/users',
+      LOGIN: '' + base + '/auth/login',
+      LOGOUT: '' + base + '/auth/logout'
     };
   }
 
@@ -44,11 +41,6 @@ var PactAPI = (function () {
     key: '_get',
     value: function _get(url, callback) {
       _superagent2['default'].get(url).end(callback);
-    }
-  }, {
-    key: '_authedGet',
-    value: function _authedGet(url, callback) {
-      _superagent2['default'].get(url).set('Authorization', this.token).end(callback);
     }
   }, {
     key: '_post',
@@ -69,6 +61,7 @@ var PactAPI = (function () {
     key: 'login',
     value: function login(_login, password) {
       var endpoints = this.endpoints;
+      var _post = this._post;
 
       return new _Promise(function (resolve, reject) {
         _post(endpoints.LOGIN, {
@@ -96,9 +89,10 @@ var PactAPI = (function () {
     key: 'getOrders',
     value: function getOrders(userId) {
       var endpoints = this.endpoints;
+      var _get = this._get;
 
       return new _Promise(function (resolve, reject) {
-        _authedGet('' + endpoints.USERS + '/' + userId + '/orders', function (err, res) {
+        _get('' + endpoints.USERS + '/' + userId + '/orders', function (err, res) {
           if (err) {
             reject(err);
             return;
@@ -112,5 +106,6 @@ var PactAPI = (function () {
   return PactAPI;
 })();
 
-exports.PactAPI = PactAPI;
+exports['default'] = PactAPI;
+module.exports = exports['default'];
 

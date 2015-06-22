@@ -1,21 +1,17 @@
 import request from 'superagent';
 require('es6-promise').polyfill();
 
-export class PactAPI {
-  constructor({host, token}) {
+export default class PactAPI {
+  constructor({base, token}) {
     this.token = token;
     this.endpoints = {
-      USERS: `${host}/users`,
-      LOGIN: `${host}/auth/login`
+      USERS: `${base}/users`,
+      LOGIN: `${base}/auth/login`,
+      LOGOUT: `${base}/auth/logout`
     };
   }
   _get(url, callback) {
     request.get(url)
-      .end(callback);
-  }
-  _authedGet(url, callback) {
-    request.get(url)
-      .set('Authorization', this.token)
       .end(callback);
   }
   _post(url, payload, callback) {
@@ -35,7 +31,7 @@ export class PactAPI {
   }
 
   login(login, password) {
-    const {endpoints} = this;
+    const {endpoints, _post} = this;
     return new Promise((resolve, reject) => {
       _post(endpoints.LOGIN, {
         login,
@@ -60,9 +56,9 @@ export class PactAPI {
   }
 
   getOrders(userId) {
-    const {endpoints} = this;
+    const {endpoints, _get} = this;
     return new Promise((resolve, reject) => {
-      _authedGet(`${endpoints.USERS}/${userId}/orders`, (err, res) => {
+      _get(`${endpoints.USERS}/${userId}/orders`, (err, res) => {
         if (err) {
           reject(err);
           return;
