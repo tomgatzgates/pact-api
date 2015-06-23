@@ -50,9 +50,16 @@ export default class PactAPI {
   }
 
   logout() {
+    const {endpoints, _post} = this;
     return new Promise((resolve, reject) => {
-      setTimeout(resolve, 500);
-    })
+      _post(endpoints.LOGOUT, {}, (err, res) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(res.body);
+      });
+    });
   }
 
   getOrders(userId) {

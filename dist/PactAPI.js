@@ -81,8 +81,17 @@ var PactAPI = (function () {
   }, {
     key: 'logout',
     value: function logout() {
+      var endpoints = this.endpoints;
+      var _post = this._post;
+
       return new _Promise(function (resolve, reject) {
-        setTimeout(resolve, 500);
+        _post(endpoints.LOGOUT, {}, function (err, res) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(res.body);
+        });
       });
     }
   }, {
