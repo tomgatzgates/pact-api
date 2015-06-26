@@ -1,33 +1,66 @@
 import request from 'superagent';
 require('es6-promise').polyfill();
 
+/*
+ * Example usage:
+ *
+ * ```js
+ *  var api = new PactAPI('my api basepath');
+ *  api.login(email, password).then(function(response){
+ *    // Login was succesful!
+ *  });
+ * ```
+ */
 export default class PactAPI {
-  constructor({base, token}) {
-    this.token = token;
+  constructor({base}) {
     this.endpoints = {
-      USERS: `${base}/users`,
-      LOGIN: `${base}/auth/login`,
+      USERS:  `${base}/users`,
+      LOGIN:  `${base}/auth/login`,
       LOGOUT: `${base}/auth/logout`
     };
+    this.accessToken = null;
   }
+
+  // Private API
   _get(url, callback) {
-    request.get(url)
-      .end(callback);
+    const req = request.get(url);
+    if (this.accessToken) {
+      req.set('Authorization', this.accessToken);
+    }
+    req.end(callback);
   }
   _post(url, payload, callback) {
-    request.post(url)
-      .type('form')
+    const req = request.post(url);
+    if (this.accessToken) {
+      req.set('Authorization', this.accessToken);
+    }
+    req.type('form')
       .send(payload)
       .end(callback);
   }
   _put(url, payload, callback) {
-    request.put(url)
-      .send(payload)
+    const req = request.put(url);
+    if (this.accessToken) {
+      req.set('Authorization', this.accessToken);
+    }
+    req.send(payload)
       .end(callback);
   }
   _del(url, callback) {
-    request.del(url)
-      .end(callback);
+    const req = request.del(url)
+    if (this.accessToken) {
+      req.set('Authorization', this.accessToken);
+    }
+    req.end(callback);
+  }
+
+  /*
+   * An `access_token` will be in the response to a successful `login`. If you
+   * wish to perform auth-requiring requests, you need to manually set the
+   * access token with this method.
+   */
+  setAccessToken(token) {
+    this.accessToken = token;
   }
 
   login(login, password) {
@@ -49,10 +82,10 @@ export default class PactAPI {
     });
   }
 
-  logout() {
+  logout(access_code) {
     const {endpoints, _post} = this;
     return new Promise((resolve, reject) => {
-      _post(endpoints.LOGOUT, {}, (err, res) => {
+      _post(endpoints.LOGOUT, {access_code}, (err, res) => {
         if (err) {
           reject(err);
           return;
