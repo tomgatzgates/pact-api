@@ -21,21 +21,34 @@ Usage
 Available Methods
 =================
 
-- `getOrders(:userId)`
+TODO
 
 
-Core APIs
----------
+Core API docs
+-------------
 
 1. Hit http://petstore.swagger.io
 1. Enter `https://pact-core.herokuapp.com/v1/api_docs` into the input
 1. View docs
 
-PactApp APIs
-------------
+PactApp API docs
+----------------
 
-Umm...
+TODO
 
 
 Running tests
 -------------
+
+TODO
+
+
+Contributing/Building
+=====================
+
+1. Fork
+1. Make changes
+1. `npm run build`
+1. Commit changes
+1. Appropriate version bump: `npm version major|minor|patch`
+1. Open a PR
