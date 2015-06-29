@@ -46,7 +46,7 @@ export default class PactAPI {
       .end(callback);
   }
   _del(url, callback) {
-    const req = request.del(url)
+    const req = request.del(url);
     if (this.accessToken) {
       req.set('Authorization', this.accessToken);
     }

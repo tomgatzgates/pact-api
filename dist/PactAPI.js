@@ -1,26 +1,20 @@
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _extends = require('babel-runtime/helpers/extends')['default'];
-
-var _Object$defineProperty = require('babel-runtime/core-js/object/define-property')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
-_Object$defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
-
-require('es6-promise').polyfill();
 
 /*
  * Example usage:
@@ -102,7 +96,7 @@ var PactAPI = (function () {
       var endpoints = this.endpoints;
       var _post = this._post;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         _post(endpoints.LOGIN, {
           login: _login,
           password: password
@@ -123,7 +117,7 @@ var PactAPI = (function () {
       var endpoints = this.endpoints;
       var _post = this._post;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         _post(endpoints.LOGOUT, { access_code: access_code }, function (err, res) {
           if (err) {
             reject(err);
@@ -139,7 +133,7 @@ var PactAPI = (function () {
       var endpoints = this.endpoints;
       var _get = this._get;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         _get('' + endpoints.USERS + '/' + userId + '/orders', function (err, res) {
           if (err) {
             reject(err);
