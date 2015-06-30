@@ -16,6 +16,8 @@ var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
+require('es6-promise').polyfill();
+
 /*
  * Example usage:
  *

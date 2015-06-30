@@ -1,4 +1,5 @@
 import request from 'superagent';
+require('es6-promise').polyfill();
 
 /*
  * Example usage:
