@@ -5,7 +5,7 @@
   "author": "Iestyn Williams <iest@me.com>",
   "main": "dist/PactAPI.js",
   "scripts": {
-    "build": "babel src/PactAPI.js > dist/PactAPI.js --stage 0",
+    "build": "babel src/PactAPI.js -o dist/PactAPI.js ",
     "test": "echo \"Error: TODO! :)\" && exit 1"
   },
   "repository": {

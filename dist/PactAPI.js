@@ -1,16 +1,20 @@
+/*eslint key-spacing: 0 camelcase: 0*/
+
 'use strict';
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _extends = require('babel-runtime/helpers/extends')['default'];
+
+var _Promise = require('babel-runtime/core-js/promise')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _superagent = require('superagent');
 
@@ -35,15 +39,21 @@ var PactAPI = (function () {
 
     _classCallCheck(this, PactAPI);
 
-    this.endpoints = {
-      USERS: '' + base + '/users',
-      LOGIN: '' + base + '/auth/login',
-      LOGOUT: '' + base + '/auth/logout'
-    };
+    this.base = base;
     this.accessToken = null;
+    this._getEndpoints = this._getEndpoints.bind(this);
   }
 
   _createClass(PactAPI, [{
+    key: '_getEndpoints',
+    value: function _getEndpoints() {
+      return {
+        USERS: this.base + '/users',
+        LOGIN: this.base + '/auth/login',
+        LOGOUT: this.base + '/auth/logout'
+      };
+    }
+  }, {
     key: '_get',
 
     // Private API
@@ -93,13 +103,18 @@ var PactAPI = (function () {
       this.accessToken = token;
     }
   }, {
+    key: 'setBase',
+    value: function setBase(base) {
+      this.base = base;
+    }
+  }, {
     key: 'login',
     value: function login(_login, password) {
-      var endpoints = this.endpoints;
-      var _post = this._post;
+      var _getEndpoints = this._getEndpoints;
 
-      return new Promise(function (resolve, reject) {
-        _post(endpoints.LOGIN, {
+      var _post = this._post.bind(this);
+      return new _Promise(function (resolve, reject) {
+        _post(_getEndpoints().LOGIN, {
           login: _login,
           password: password
         }, function (err, res) {
@@ -116,11 +131,11 @@ var PactAPI = (function () {
   }, {
     key: 'logout',
     value: function logout(access_code) {
-      var endpoints = this.endpoints;
-      var _post = this._post;
+      var _getEndpoints = this._getEndpoints;
 
-      return new Promise(function (resolve, reject) {
-        _post(endpoints.LOGOUT, { access_code: access_code }, function (err, res) {
+      var _post = this._post.bind(this);
+      return new _Promise(function (resolve, reject) {
+        _post(_getEndpoints().LOGOUT, { access_code: access_code }, function (err, res) {
           if (err) {
             reject(err);
             return;
@@ -132,11 +147,11 @@ var PactAPI = (function () {
   }, {
     key: 'getOrders',
     value: function getOrders(userId) {
-      var endpoints = this.endpoints;
-      var _get = this._get;
+      var _getEndpoints = this._getEndpoints;
 
-      return new Promise(function (resolve, reject) {
-        _get('' + endpoints.USERS + '/' + userId + '/orders', function (err, res) {
+      var _get = this._get.bind(this);
+      return new _Promise(function (resolve, reject) {
+        _get(_getEndpoints().USERS + '/' + userId + '/orders', function (err, res) {
           if (err) {
             reject(err);
             return;
@@ -152,4 +167,3 @@ var PactAPI = (function () {
 
 exports['default'] = PactAPI;
 module.exports = exports['default'];
-

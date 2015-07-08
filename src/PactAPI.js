@@ -1,3 +1,5 @@
+/*eslint key-spacing: 0 camelcase: 0*/
+
 import request from 'superagent';
 require('es6-promise').polyfill();
 
@@ -13,12 +15,17 @@ require('es6-promise').polyfill();
  */
 export default class PactAPI {
   constructor({base}) {
-    this.endpoints = {
-      USERS:  `${base}/users`,
-      LOGIN:  `${base}/auth/login`,
-      LOGOUT: `${base}/auth/logout`
-    };
+    this.base = base;
     this.accessToken = null;
+    this._getEndpoints = this._getEndpoints.bind(this);
+  }
+
+  _getEndpoints() {
+    return {
+      USERS:  `${this.base}/users`,
+      LOGIN:  `${this.base}/auth/login`,
+      LOGOUT: `${this.base}/auth/logout`
+    };
   }
 
   // Private API
@@ -62,11 +69,15 @@ export default class PactAPI {
   setAccessToken(token) {
     this.accessToken = token;
   }
+  setBase(base) {
+    this.base = base;
+  }
 
   login(login, password) {
-    const {endpoints, _post} = this;
+    const {_getEndpoints} = this;
+    const _post = this._post.bind(this);
     return new Promise((resolve, reject) => {
-      _post(endpoints.LOGIN, {
+      _post(_getEndpoints().LOGIN, {
         login,
         password
       }, (err, res) => {
@@ -83,9 +94,10 @@ export default class PactAPI {
   }
 
   logout(access_code) {
-    const {endpoints, _post} = this;
+    const {_getEndpoints} = this;
+    const _post = this._post.bind(this);
     return new Promise((resolve, reject) => {
-      _post(endpoints.LOGOUT, {access_code}, (err, res) => {
+      _post(_getEndpoints().LOGOUT, {access_code}, (err, res) => {
         if (err) {
           reject(err);
           return;
@@ -96,9 +108,10 @@ export default class PactAPI {
   }
 
   getOrders(userId) {
-    const {endpoints, _get} = this;
+    const {_getEndpoints} = this;
+    const _get = this._get.bind(this);
     return new Promise((resolve, reject) => {
-      _get(`${endpoints.USERS}/${userId}/orders`, (err, res) => {
+      _get(`${_getEndpoints().USERS}/${userId}/orders`, (err, res) => {
         if (err) {
           reject(err);
           return;
