@@ -20,7 +20,13 @@ var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
+var _invariant = require('invariant');
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
 require('es6-promise').polyfill();
+
+function reqCallback(err, res) {}
 
 /*
  * Example usage:
@@ -49,6 +55,7 @@ var PactAPI = (function () {
     value: function _getEndpoints() {
       return {
         USERS: this.base + '/users',
+        PRODUCTS: this.base + '/products',
         LOGIN: this.base + '/auth/login',
         LOGOUT: this.base + '/auth/logout'
       };
@@ -100,16 +107,22 @@ var PactAPI = (function () {
      * access token with this method.
      */
     value: function setAccessToken(token) {
+      (0, _invariant2['default'])(token, 'PactAPI.setAccessToken(...): You must supply a valid token');
       this.accessToken = token;
     }
   }, {
     key: 'setBase',
     value: function setBase(base) {
+      (0, _invariant2['default'])(base, 'PactAPI.setBase(...): You must supply a base');
       this.base = base;
     }
   }, {
     key: 'login',
+
+    /* Authentication */
     value: function login(_login, password) {
+      (0, _invariant2['default'])(_login && password, 'PactAPI.login(...): You must supply a valid login and password.\n      You passed "' + _login + '" and "' + password + '".');
+
       var _getEndpoints = this._getEndpoints;
 
       var _post = this._post.bind(this);
@@ -131,6 +144,8 @@ var PactAPI = (function () {
   }, {
     key: 'logout',
     value: function logout(access_code) {
+      (0, _invariant2['default'])(access_code, 'PactAPI.logout(...): You must supply a valid access code.\n      You passed "' + access_code + '".');
+
       var _getEndpoints = this._getEndpoints;
 
       var _post = this._post.bind(this);
@@ -146,12 +161,55 @@ var PactAPI = (function () {
     }
   }, {
     key: 'getOrders',
+
+    /* Orders */
     value: function getOrders(userId) {
+      (0, _invariant2['default'])(userId, 'PactAPI.getOrders(...): You must supply a valid user ID.\n      You passed "' + userId + '".');
+
       var _getEndpoints = this._getEndpoints;
 
       var _get = this._get.bind(this);
       return new _Promise(function (resolve, reject) {
         _get(_getEndpoints().USERS + '/' + userId + '/orders', function (err, res) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(res.body);
+        });
+      });
+    }
+  }, {
+    key: 'updateOrderDispatchDate',
+    value: function updateOrderDispatchDate(userId, orderId, yearMonthDayString) {
+      (0, _invariant2['default'])(userId && orderId && yearMonthDayString, 'PactAPI.getOrders(...): You must supply valid arguments.\n      You passed "' + userId + '", "' + orderId + '", and "' + yearMonthDayString + '".');
+      (0, _invariant2['default'])(yearMonthDayString.split('-').length === 3, 'PactAPI.updateOrderDispatchDate(...): You must supply a valid yearMonthDayString with the signature YYYY-MM-DD.');
+
+      var _getEndpoints = this._getEndpoints;
+
+      var _put = this._put.bind(this);
+      return new _Promise(function (resolve, reject) {
+        _put(_getEndpoints().USERS + '/' + userId + '/orders/' + orderId, {
+          'order[dispatch_date]': yearMonthDayString
+        }, function (err, res) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(res.body);
+        });
+      });
+    }
+  }, {
+    key: 'getProducts',
+
+    /* Products */
+    value: function getProducts() {
+      var _getEndpoints = this._getEndpoints;
+
+      var _get = this._get.bind(this);
+      return new _Promise(function (resolve, reject) {
+        _get(_getEndpoints().PRODUCTS, function (err, res) {
           if (err) {
             reject(err);
             return;
