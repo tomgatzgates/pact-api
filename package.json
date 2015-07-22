@@ -16,7 +16,6 @@
     "babel": "^5.5.8"
   },
   "dependencies": {
-    "es6-promise": "^2.3.0",
     "invariant": "^2.1.0",
     "superagent": "^1.2.0"
   }

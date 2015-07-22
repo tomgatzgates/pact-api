@@ -24,10 +24,6 @@ var _invariant = require('invariant');
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-require('es6-promise').polyfill();
-
-function reqCallback(err, res) {}
-
 /*
  * Example usage:
  *
