@@ -17,6 +17,8 @@ Usage
   getOrders(myUserID).then(doStuffWithOrders, handleFailure);
   ```
 
+**This project currently requires the use of a module build tool like browserify or webpack**. The output `dist` is simply babel transformed code to ES5. In future this will be a completely packaged dist.
+
 
 Available Methods
 =================
