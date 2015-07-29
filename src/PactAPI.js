@@ -29,7 +29,7 @@ export default class PactAPI {
     };
   }
 
-  // Private API
+  // Private API: convenience request methods
   _get(url, callback) {
     const req = request.get(url);
     if (this.accessToken) {
@@ -63,6 +63,8 @@ export default class PactAPI {
   }
 
   /*
+   * Set the `access_token` to be used on all requests.
+   *
    * An `access_token` will be in the response to a successful `login`. If you
    * wish to perform auth-requiring requests, you need to manually set the
    * access token with this method.
@@ -71,12 +73,16 @@ export default class PactAPI {
     invariant(token, `PactAPI.setAccessToken(...): You must supply a valid token`);
     this.accessToken = token;
   }
+
+  /*
+   * Set the base URL to be used by the instance.
+   */
   setBase(base) {
     invariant(base, `PactAPI.setBase(...): You must supply a base`);
     this.base = base;
   }
 
-  /* Authentication */
+  /* Log a user in */
   login(login, password) {
     invariant(
       login && password,
@@ -102,6 +108,8 @@ export default class PactAPI {
       });
     });
   }
+
+  /* Log a user out */
   logout(access_code) {
     invariant(
       access_code,
@@ -126,7 +134,7 @@ export default class PactAPI {
     });
   }
 
-  /* Orders */
+  /* Get all the orders for a user */
   getOrders(userId) {
     invariant(
       userId,
@@ -146,7 +154,12 @@ export default class PactAPI {
       });
     });
   }
-  updateOrderDispatchDate(userId, orderId, yearMonthDayString) {
+
+  /*
+   * Update the dispatch date for an order.
+   * `yearMonthDayString` is in the format of `YYYY-MM-DD`.
+   */
+  updateOrderDispatchDate({userId, orderId, yearMonthDayString}) {
     invariant(
       userId && orderId && yearMonthDayString,
       `PactAPI.getOrders(...): You must supply valid arguments.
@@ -176,7 +189,33 @@ export default class PactAPI {
     });
   }
 
-  /* Products */
+  /*
+   * Update the preparation (grind) or coffee ID for an order.
+   */
+  updateOrderCoffee({userId, orderId, itemId, productId, coffeeId, preparation}) {
+    const {_getEndpoints} = this;
+    const {USERS} = _getEndpoints();
+    const _put = this._put.bind(this);
+    return new Promise((resolve, reject) => {
+      _put(
+        `${USERS}/${userId}/orders/${orderId}/items/${itemId}`,
+        {
+          'item[product_attributes][id]': productId,
+          'item[product_attributes][options][preparation]': preparation,
+          'item[product_attributes][options][coffee_type_id]': coffeeId
+        },
+        (err, res) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(res.body);
+        }
+      );
+    });
+  }
+
+  /* Fetch all the products */
   getProducts() {
     const {_getEndpoints} = this;
     const _get = this._get.bind(this);
