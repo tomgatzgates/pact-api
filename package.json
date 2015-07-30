@@ -2,7 +2,6 @@
   "name": "@pactcoffee/pact-api",
   "version": "1.4.0",
   "description": "JavaScript wrapper around Pact's APIs for server & browser.",
-  "author": "Iestyn Williams <iest@me.com>",
   "main": "lib/PactAPI.js",
   "scripts": {
     "build": "scripts/build.sh",
