@@ -5,14 +5,16 @@
   "main": "lib/PactAPI.js",
   "scripts": {
     "build": "scripts/build.sh",
-    "test": "echo \"Error: TODO! :)\" && exit 1"
+    "prepublish": "npm run build",
+    "test": "eslint modules"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:PactCoffee/pact-api.git"
   },
   "devDependencies": {
-    "babel": "^5.8.19"
+    "babel": "^5.8.19",
+    "eslint": "^0.24.1"
   },
   "dependencies": {
     "invariant": "^2.1.0",
