@@ -1,7 +1,7 @@
 /*eslint key-spacing: 0 camelcase: 0*/
 
-import request from 'superagent';
 import invariant from 'invariant';
+import HTTPRequestable from './HTTPRequestable';
 
 /*
  * Example usage:
@@ -13,8 +13,9 @@ import invariant from 'invariant';
  *  });
  * ```
  */
-export default class PactAPI {
+export default class PactAPI extends HTTPRequestable {
   constructor({base}) {
+    super();
     this.base = base;
     this.accessToken = null;
     this._getEndpoints = this._getEndpoints.bind(this);
@@ -27,39 +28,6 @@ export default class PactAPI {
       LOGIN:    `${this.base}/auth/login`,
       LOGOUT:   `${this.base}/auth/logout`
     };
-  }
-
-  // Private API: convenience request methods
-  _get(url, callback) {
-    const req = request.get(url);
-    if (this.accessToken) {
-      req.set('Authorization', this.accessToken);
-    }
-    req.end(callback);
-  }
-  _post(url, payload, callback) {
-    const req = request.post(url);
-    if (this.accessToken) {
-      req.set('Authorization', this.accessToken);
-    }
-    req.type('form')
-      .send(payload)
-      .end(callback);
-  }
-  _put(url, payload, callback) {
-    const req = request.put(url);
-    if (this.accessToken) {
-      req.set('Authorization', this.accessToken);
-    }
-    req.send(payload)
-      .end(callback);
-  }
-  _del(url, callback) {
-    const req = request.del(url);
-    if (this.accessToken) {
-      req.set('Authorization', this.accessToken);
-    }
-    req.end(callback);
   }
 
   /*
