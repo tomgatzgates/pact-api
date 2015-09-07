@@ -17,7 +17,7 @@ export default class PactAPI extends HTTPRequestable {
   constructor({base}) {
     super();
     this.base = base;
-    this.accessToken = null;
+    this.token = null;
     this._getEndpoints = this._getEndpoints.bind(this);
   }
 
@@ -31,15 +31,15 @@ export default class PactAPI extends HTTPRequestable {
   }
 
   /*
-   * Set the `access_token` to be used on all requests.
+   * Set the APi token to be used on all requests.
    *
-   * An `access_token` will be in the response to a successful `login`. If you
+   * A fresh token will be sent in the response to a successful login. If you
    * wish to perform auth-requiring requests, you need to manually set the
    * access token with this method.
    */
-  setAccessToken(token) {
-    invariant(token, `PactAPI.setAccessToken(...): You must supply a valid token`);
-    this.accessToken = token;
+  setToken(token) {
+    invariant(token, `PactAPI.setToken(...): You must supply a valid token`);
+    this.token = token;
   }
 
   /*
