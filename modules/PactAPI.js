@@ -31,18 +31,6 @@ export default class PactAPI extends HTTPRequestable {
   }
 
   /*
-   * Set the APi token to be used on all requests.
-   *
-   * A fresh token will be sent in the response to a successful login. If you
-   * wish to perform auth-requiring requests, you need to manually set the
-   * access token with this method.
-   */
-  setToken(token) {
-    invariant(token, `PactAPI.setToken(...): You must supply a valid token`);
-    this.token = token;
-  }
-
-  /*
    * Set the base URL to be used by the instance.
    */
   setBase(base) {

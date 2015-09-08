@@ -32,4 +32,7 @@ export default class HTTPRequestable {
     }
     req.end(callback);
   }
+  setToken(token) {
+    this.token = token;
+  }
 }
