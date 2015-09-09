@@ -5,6 +5,7 @@ module.exports = function(config) {
   config.set({
     frameworks: [
       'browserify',
+      'chai-as-promised',
       'mocha',
       'sinon-chai'
     ],
