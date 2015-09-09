@@ -16,7 +16,7 @@ export default class HTTPRequestable {
     if (this.token) {
       req.auth(this.token, '');
     }
-    req.type('form')
+    req
       .send(payload)
       .end(callback);
   }

@@ -12,39 +12,42 @@ describe('HTTPRequestable', () => {
 
   const reqMethods = {};
 
-  const typeSpy = sinon.stub().returns(reqMethods);
   const sendSpy = sinon.stub().returns(reqMethods);
   const authSpy = sinon.stub().returns(reqMethods);
   const endSpy = sinon.stub().returns(reqMethods);
 
-  reqMethods.type = typeSpy;
   reqMethods.send = sendSpy;
   reqMethods.auth = authSpy;
   reqMethods.end = endSpy;
 
-  ['get', 'put', 'post', 'del'].forEach((method) => {
-    sinon.stub(superagent, method).returns(reqMethods);
-  });
 
   beforeEach(() => {
+    ['get', 'put', 'post', 'del'].forEach((method) => {
+      sinon.stub(superagent, method).returns(reqMethods);
+    });
     instance = new HTTPRequestable();
-    typeSpy.reset();
     sendSpy.reset();
     authSpy.reset();
     endSpy.reset();
     fakeCallback.reset();
   });
 
+  afterEach(() => {
+    ['get', 'put', 'post', 'del'].forEach((method) => {
+      superagent[method].restore();
+    });
+  });
+
   describe(`The constructor`, () => {
     it('Can be passed an auth token', () => {
-      assert.ok(new HTTPRequestable(fakeToken).token === fakeToken);
+      assert.equal(new HTTPRequestable(fakeToken).token, fakeToken);
     });
   });
 
   describe('setToken', () => {
     it('Sets the token used for authentication', () => {
       instance.setToken(fakeToken);
-      assert.ok(instance.token === fakeToken);
+      assert.equal(instance.token, fakeToken);
     });
   });
 
@@ -88,11 +91,6 @@ describe('HTTPRequestable', () => {
     it(`Does not use auth when there's no token present`, () => {
       instance._post(fakeUrl);
       assert.notOk(authSpy.calledOnce);
-    });
-
-    it('Sets the payload type to "form"', () => {
-      instance._post(fakeUrl);
-      assert.ok(typeSpy.calledWith('form'));
     });
 
     it('Sends the given payload', () => {
