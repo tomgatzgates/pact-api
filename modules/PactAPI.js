@@ -38,12 +38,14 @@ export default class PactAPI extends HTTPRequestable {
   login(login, password) {
     invariant(
       login && password,
-      `PactAPI.login(...): You must supply a valid login and password.
+      `PactAPI.login(...): You must supply a login and password.
       You passed "${login}" and "${password}".`
     );
 
     const {_getEndpoints} = this;
     const _post = this._post.bind(this);
+    const setToken = this.setToken.bind(this);
+
     return new Promise((resolve, reject) => {
       _post(_getEndpoints().LOGIN, {
         login,
@@ -53,27 +55,27 @@ export default class PactAPI extends HTTPRequestable {
           reject(err);
           return;
         }
+        const {token} = res.body;
+        setToken(token);
         resolve({
-          ...res.body,
-          user_id: `${res.body.user_id}` // kinda hacky but we need a string
+          token
         });
       });
     });
   }
 
-  logout(access_code) {
+  logout() {
     invariant(
-      access_code,
-      `PactAPI.logout(...): You must supply a valid access code.
-      You passed "${access_code}".`
+      this.token,
+      `PactAPI.logout(...): Auth token required to logout. Make sure to pass a valid token when creating a new PactAPI instance, or `
     );
 
     const {_getEndpoints} = this;
-    const _post = this._post.bind(this);
+    const _del = this._del.bind(this);
+
     return new Promise((resolve, reject) => {
-      _post(
+      _del(
         _getEndpoints().LOGOUT,
-        {access_code},
         (err, res) => {
           if (err) {
             reject(err);
