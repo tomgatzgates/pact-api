@@ -14,19 +14,16 @@ import HTTPRequestable from './HTTPRequestable';
  * ```
  */
 export default class PactAPI extends HTTPRequestable {
-  constructor({base}) {
-    super();
+  constructor(base, token) {
+    super(token);
     this.base = base;
-    this.token = null;
     this._getEndpoints = this._getEndpoints.bind(this);
   }
 
   _getEndpoints() {
     return {
-      USERS:    `${this.base}/users`,
-      PRODUCTS: `${this.base}/products`,
-      LOGIN:    `${this.base}/auth/login`,
-      LOGOUT:   `${this.base}/auth/logout`
+      LOGIN:  `${this.base}/tokens/`,
+      LOGOUT: `${this.base}/tokens/me`
     };
   }
 
@@ -38,7 +35,6 @@ export default class PactAPI extends HTTPRequestable {
     this.base = base;
   }
 
-  /* Log a user in */
   login(login, password) {
     invariant(
       login && password,
@@ -65,7 +61,6 @@ export default class PactAPI extends HTTPRequestable {
     });
   }
 
-  /* Log a user out */
   logout(access_code) {
     invariant(
       access_code,
@@ -89,105 +84,5 @@ export default class PactAPI extends HTTPRequestable {
       );
     });
   }
-
-  /* Get all the orders for a user */
-  getOrders(userId) {
-    invariant(
-      userId,
-      `PactAPI.getOrders(...): You must supply a valid user ID.
-      You passed "${userId}".`
-    );
-
-    const {_getEndpoints} = this;
-    const _get = this._get.bind(this);
-    return new Promise((resolve, reject) => {
-      _get(`${_getEndpoints().USERS}/${userId}/orders`, (err, res) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(res.body);
-      });
-    });
-  }
-
-  /*
-   * Update the dispatch date for an order.
-   * `yearMonthDayString` is in the format of `YYYY-MM-DD`.
-   */
-  updateOrderDispatchDate({userId, orderId, yearMonthDayString}) {
-    invariant(
-      userId && orderId && yearMonthDayString,
-      `PactAPI.getOrders(...): You must supply valid arguments.
-      You passed "${userId}", "${orderId}", and "${yearMonthDayString}".`
-    );
-    invariant(
-      yearMonthDayString.split('-').length === 3,
-      `PactAPI.updateOrderDispatchDate(...): You must supply a valid yearMonthDayString with the signature YYYY-MM-DD.`
-    );
-
-    const {_getEndpoints} = this;
-    const _put = this._put.bind(this);
-    return new Promise((resolve, reject) => {
-      _put(
-        `${_getEndpoints().USERS}/${userId}/orders/${orderId}`,
-        {
-          'order[dispatch_date]': yearMonthDayString
-        },
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
-  /*
-   * Update the preparation (grind) or coffee ID for an order.
-   */
-  updateOrderCoffee({userId, orderId, itemId, productId, coffeeId, preparation}) {
-    const {_getEndpoints} = this;
-    const {USERS} = _getEndpoints();
-    const _put = this._put.bind(this);
-    return new Promise((resolve, reject) => {
-      _put(
-        `${USERS}/${userId}/orders/${orderId}/items/${itemId}`,
-        {
-          'item[product_attributes][id]': productId,
-          'item[product_attributes][options][preparation]': preparation,
-          'item[product_attributes][options][coffee_type_id]': coffeeId
-        },
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
-  /* Fetch all the products */
-  getProducts() {
-    const {_getEndpoints} = this;
-    const _get = this._get.bind(this);
-    return new Promise((resolve, reject) => {
-      _get(
-        _getEndpoints().PRODUCTS,
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
 }
 

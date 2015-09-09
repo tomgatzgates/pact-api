@@ -35,6 +35,19 @@ describe('HTTPRequestable', () => {
     fakeCallback.reset();
   });
 
+  describe(`The constructor`, () => {
+    it('Can be passed an auth token', () => {
+      assert.ok(new HTTPRequestable(fakeToken).token === fakeToken);
+    });
+  });
+
+  describe('setToken', () => {
+    it('Sets the token used for authentication', () => {
+      instance.setToken(fakeToken);
+      assert.ok(instance.token === fakeToken);
+    });
+  });
+
   describe('_get', () => {
     it(`GETs the given URL`, () => {
       instance._get(fakeUrl);
