@@ -1,6 +1,9 @@
 import request from 'superagent';
 
 export default class HTTPRequestable {
+  constructor(token = null) {
+    this.token = token;
+  }
   _get(url, callback) {
     const req = request.get(url);
     if (this.token) {
