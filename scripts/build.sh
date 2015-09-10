@@ -5,4 +5,4 @@ build_dir=lib
 
 rm -rf $build_dir
 
-$babel ./modules -d $build_dir --ignore "__tests__" --loose all
+$babel ./modules -d $build_dir --loose all

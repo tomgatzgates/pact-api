@@ -14,32 +14,17 @@ import HTTPRequestable from './HTTPRequestable';
  * ```
  */
 export default class PactAPI extends HTTPRequestable {
-  constructor({base}) {
-    super();
+  constructor(base, token) {
+    super(token);
     this.base = base;
-    this.accessToken = null;
     this._getEndpoints = this._getEndpoints.bind(this);
   }
 
   _getEndpoints() {
     return {
-      USERS:    `${this.base}/users`,
-      PRODUCTS: `${this.base}/products`,
-      LOGIN:    `${this.base}/auth/login`,
-      LOGOUT:   `${this.base}/auth/logout`
+      LOGIN:  `${this.base}/tokens/`,
+      LOGOUT: `${this.base}/tokens/me`
     };
-  }
-
-  /*
-   * Set the `access_token` to be used on all requests.
-   *
-   * An `access_token` will be in the response to a successful `login`. If you
-   * wish to perform auth-requiring requests, you need to manually set the
-   * access token with this method.
-   */
-  setAccessToken(token) {
-    invariant(token, `PactAPI.setAccessToken(...): You must supply a valid token`);
-    this.accessToken = token;
   }
 
   /*
@@ -50,16 +35,17 @@ export default class PactAPI extends HTTPRequestable {
     this.base = base;
   }
 
-  /* Log a user in */
   login(login, password) {
     invariant(
       login && password,
-      `PactAPI.login(...): You must supply a valid login and password.
+      `PactAPI.login(...): You must supply a login and password.
       You passed "${login}" and "${password}".`
     );
 
     const {_getEndpoints} = this;
     const _post = this._post.bind(this);
+    const setToken = this.setToken.bind(this);
+
     return new Promise((resolve, reject) => {
       _post(_getEndpoints().LOGIN, {
         login,
@@ -69,28 +55,27 @@ export default class PactAPI extends HTTPRequestable {
           reject(err);
           return;
         }
+        const {token} = res.body;
+        setToken(token);
         resolve({
-          ...res.body,
-          user_id: `${res.body.user_id}` // kinda hacky but we need a string
+          token
         });
       });
     });
   }
 
-  /* Log a user out */
-  logout(access_code) {
+  logout() {
     invariant(
-      access_code,
-      `PactAPI.logout(...): You must supply a valid access code.
-      You passed "${access_code}".`
+      this.token,
+      `PactAPI.logout(...): Auth token required to logout. Make sure to pass a valid token when creating a new PactAPI instance, or `
     );
 
     const {_getEndpoints} = this;
-    const _post = this._post.bind(this);
+    const _del = this._del.bind(this);
+
     return new Promise((resolve, reject) => {
-      _post(
+      _del(
         _getEndpoints().LOGOUT,
-        {access_code},
         (err, res) => {
           if (err) {
             reject(err);
@@ -101,105 +86,5 @@ export default class PactAPI extends HTTPRequestable {
       );
     });
   }
-
-  /* Get all the orders for a user */
-  getOrders(userId) {
-    invariant(
-      userId,
-      `PactAPI.getOrders(...): You must supply a valid user ID.
-      You passed "${userId}".`
-    );
-
-    const {_getEndpoints} = this;
-    const _get = this._get.bind(this);
-    return new Promise((resolve, reject) => {
-      _get(`${_getEndpoints().USERS}/${userId}/orders`, (err, res) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(res.body);
-      });
-    });
-  }
-
-  /*
-   * Update the dispatch date for an order.
-   * `yearMonthDayString` is in the format of `YYYY-MM-DD`.
-   */
-  updateOrderDispatchDate({userId, orderId, yearMonthDayString}) {
-    invariant(
-      userId && orderId && yearMonthDayString,
-      `PactAPI.getOrders(...): You must supply valid arguments.
-      You passed "${userId}", "${orderId}", and "${yearMonthDayString}".`
-    );
-    invariant(
-      yearMonthDayString.split('-').length === 3,
-      `PactAPI.updateOrderDispatchDate(...): You must supply a valid yearMonthDayString with the signature YYYY-MM-DD.`
-    );
-
-    const {_getEndpoints} = this;
-    const _put = this._put.bind(this);
-    return new Promise((resolve, reject) => {
-      _put(
-        `${_getEndpoints().USERS}/${userId}/orders/${orderId}`,
-        {
-          'order[dispatch_date]': yearMonthDayString
-        },
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
-  /*
-   * Update the preparation (grind) or coffee ID for an order.
-   */
-  updateOrderCoffee({userId, orderId, itemId, productId, coffeeId, preparation}) {
-    const {_getEndpoints} = this;
-    const {USERS} = _getEndpoints();
-    const _put = this._put.bind(this);
-    return new Promise((resolve, reject) => {
-      _put(
-        `${USERS}/${userId}/orders/${orderId}/items/${itemId}`,
-        {
-          'item[product_attributes][id]': productId,
-          'item[product_attributes][options][preparation]': preparation,
-          'item[product_attributes][options][coffee_type_id]': coffeeId
-        },
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
-  /* Fetch all the products */
-  getProducts() {
-    const {_getEndpoints} = this;
-    const _get = this._get.bind(this);
-    return new Promise((resolve, reject) => {
-      _get(
-        _getEndpoints().PRODUCTS,
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
 }
 
