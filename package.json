@@ -6,7 +6,7 @@
   "scripts": {
     "build": "scripts/build.sh",
     "prepublish": "npm run build",
-    "test": "eslint modules"
+    "test": "eslint modules && karma start"
   },
   "repository": {
     "type": "git",
@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "babel": "^5.8.19",
+    "babel-eslint": "^4.1.1",
+    "babel-runtime": "^5.8.20",
     "babelify": "^6.3.0",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",

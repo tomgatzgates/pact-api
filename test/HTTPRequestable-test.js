@@ -142,17 +142,17 @@ describe('HTTPRequestable', () => {
 
     it(`Sets authentication when a token is present`, () => {
       instance.setToken(fakeToken);
-      instance._post(fakeUrl);
+      instance._del(fakeUrl);
       assert.ok(authSpy.calledWith(fakeToken, ''));
     });
 
     it(`Does not use auth when there's no token present`, () => {
-      instance._post(fakeUrl);
+      instance._del(fakeUrl);
       assert.notOk(authSpy.calledOnce);
     });
 
     it(`Has it's callback called when the request ends`, () => {
-      instance._post(fakeUrl, fakePayload, fakeCallback);
+      instance._del(fakeUrl, fakeCallback);
       assert.ok(endSpy.calledWith(fakeCallback));
     });
   });

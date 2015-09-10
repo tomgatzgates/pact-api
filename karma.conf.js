@@ -1,5 +1,4 @@
 var isCI = process.env.CI === 'true';
-var devBrowser = process.env.PHANTOM ? 'PhantomJS' : 'Chrome';
 
 module.exports = function(config) {
   config.set({
@@ -11,22 +10,25 @@ module.exports = function(config) {
     ],
 
     files: [
-      "modules/**/*.js",
-      "test/**/*-test.js"
+      'modules/**/*.js',
+      'test/**/*-test.js'
     ],
 
     preprocessors: {
-      "modules/**/*.js": ["browserify"],
-      "test/**/*-test.js": ["browserify"]
+      'modules/**/*.js': ['browserify'],
+      'test/**/*-test.js': ['browserify']
     },
 
     autoWatch: true,
 
-    browsers: [isCI ? 'ChromeTravisCI' : devBrowser],
+    browsers: ['Chrome'],
+
+    captureTimeout: 60000,
+    browserNoActivityTimeout: 45000,
 
     singleRun: isCI,
 
-    reporters: ['mocha'],
+    reporters: [isCI ? 'dots' : 'mocha'],
 
     browserify: {
       debug: true,
