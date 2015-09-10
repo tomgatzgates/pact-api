@@ -110,7 +110,7 @@ describe('PactAPI', () => {
 
       instance.login(LOGIN, PASS);
       assert.deepEqual(spy.lastCall.args[1], {
-        login: LOGIN,
+        email: LOGIN,
         password: PASS
       });
     });
