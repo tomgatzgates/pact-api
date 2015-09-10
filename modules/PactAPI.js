@@ -35,11 +35,11 @@ export default class PactAPI extends HTTPRequestable {
     this.base = base;
   }
 
-  login(login, password) {
+  login(email, password) {
     invariant(
-      login && password,
-      `PactAPI.login(...): You must supply a login and password.
-      You passed "${login}" and "${password}".`
+      email && password,
+      `PactAPI.login(...): You must supply an email and password.
+      You passed "${email}" and "${password}".`
     );
 
     const {_getEndpoints} = this;
@@ -48,7 +48,7 @@ export default class PactAPI extends HTTPRequestable {
 
     return new Promise((resolve, reject) => {
       _post(_getEndpoints().LOGIN, {
-        login,
+        email,
         password
       }, (err, res) => {
         if (err) {
