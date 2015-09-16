@@ -3,46 +3,40 @@ PactAPI
 
 > A JS wrapper around Pact's APIs to make it faster and easier to use in client/server JS projects.
 
-Each method returns a [promise](http://www.html5rocks.com/en/tutorials/es6/promises/). The promise will resolve to the raw output of the Pact API, or reject with a (hopefully) helpful error message.
+Each async method returns a [promise](http://www.html5rocks.com/en/tutorials/es6/promises/).
 
 
 Usage
 =====
 
-1. `npm install https://github.com/PactCoffee/pact-api`
-1. Use in your project:
-  ```js
-  import {getOrders} from 'PactAPI';
+**This project currently requires the use of a module build tool like browserify or webpack**. The output `dist` is simply babel transformed code to ES5. In future this could be a completely packaged dist.
 
-  getOrders(myUserID).then(doStuffWithOrders, handleFailure);
-  ```
+### Constructor `new PactAPI(base, ?token)`
 
-**This project currently requires the use of a module build tool like browserify or webpack**. The output `dist` is simply babel transformed code to ES5. In future this will be a completely packaged dist.
+- `base` is the URL of the API
+- `token` is an optional authentication token
 
+### `setBase(newBase)`
 
-Available Methods
-=================
+Set the base URL to the given base.
 
-TODO
+### `setToken(token)`
 
+Set the auth token on the instance. **Note:** On `login`, the instance will automatically set the token.
 
-Core API docs
--------------
+### `login(email, password).then({token}, err)`
 
-1. Hit http://petstore.swagger.io
-1. Enter `https://core.pactcoffee.com/v1/api_docs` into the input
-1. View docs
+Login to the API, returning the auth token. This method automatically calls `setToken` on the instance, authenticating future calls.
 
-PactApp API docs
-----------------
+### `logout().then(response, err)`
 
-TODO
+Log out of the API using the currently-set auth token
 
 
 Running tests
 -------------
 
-TODO
+`npm run test`
 
 
 Contributing/Building
