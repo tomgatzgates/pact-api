@@ -1,4 +1,4 @@
-/*eslint key-spacing: 0 camelcase: 0*/
+/* eslint key-spacing: 0 */
 
 import invariant from 'invariant';
 import HTTPRequestable from './HTTPRequestable';
@@ -7,7 +7,7 @@ import HTTPRequestable from './HTTPRequestable';
  * Example usage:
  *
  * ```js
- *  var api = new PactAPI('my api basepath');
+ *  var api = new PactAPI('my/api/basepath', 'optionalToken');
  *  api.login(email, password).then(function(response){
  *    // Login was succesful!
  *  });
@@ -23,7 +23,7 @@ export default class PactAPI extends HTTPRequestable {
   _getEndpoints() {
     return {
       LOGIN:  `${this.base}/tokens/`,
-      LOGOUT: `${this.base}/tokens/me`
+      LOGOUT: `${this.base}/tokens/me`,
     };
   }
 
@@ -49,7 +49,7 @@ export default class PactAPI extends HTTPRequestable {
     return new Promise((resolve, reject) => {
       _post(_getEndpoints().LOGIN, {
         email,
-        password
+        password,
       }, (err, res) => {
         if (err) {
           reject(err);
@@ -58,7 +58,7 @@ export default class PactAPI extends HTTPRequestable {
         const {token} = res.body;
         setToken(token);
         resolve({
-          token
+          token,
         });
       });
     });
@@ -86,5 +86,7 @@ export default class PactAPI extends HTTPRequestable {
       );
     });
   }
+
+  addresses: {}
 }
 
