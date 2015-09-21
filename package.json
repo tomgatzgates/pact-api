@@ -21,6 +21,7 @@
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
     "eslint": "^0.24.1",
+    "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-mocha": "^0.5.1",
     "karma": "^0.13.9",
     "karma-browserify": "^4.3.0",
