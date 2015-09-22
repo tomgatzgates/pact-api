@@ -3,18 +3,17 @@ import pactMethod from '../pactMethod';
 
 export default class Token extends PactResource {
   constructor(pactAPI) {
-    const includeBasic = {
-      path: '/tokens',
-      methods: ['create'],
-    };
+    const path = '/tokens';
+
+    const includeBasic = ['create'];
 
     const methods = {
       del: pactMethod({
         method: 'del',
-        path: '/tokens/me',
+        path: '/me',
       }),
     };
 
-    super({pactAPI, methods, includeBasic});
+    super({pactAPI, path, methods, includeBasic});
   }
 }

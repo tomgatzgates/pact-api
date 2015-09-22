@@ -11,15 +11,18 @@ const basicMethods = {
 };
 
 export default class PactResource {
-  constructor({pactAPI, includeBasic, methods}) {
+  constructor({pactAPI, path, includeBasic, methods}) {
     this._pactAPI = pactAPI;
+    this.path = path;
 
-    Object.tokens(methods).forEach(k => {
+    // Resource path is different to method path
+
+    Object.keys(methods).forEach(k => {
       this[k] = methods[k];
     });
 
     if (includeBasic) {
-      includeBasic.methods.forEach(method => {
+      includeBasic.forEach(method => {
         this[method] = basicMethods[method];
       }, this);
     }
@@ -30,14 +33,23 @@ export default class PactResource {
     const token = this._pactAPI.getAPIField('token');
     const url = base + path;
 
-    // TODO: check methods exist on superagent
-    const req = request[method](url);
+    return new Promise((resolve, reject) => {
+      const req = request[method](url);
+      if (payload) {
+        req.send(payload);
+      }
+      if (token) {
+        req.auth(token, '');
+      }
+      req.end((err, res) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(res.body);
+      });
+    });
 
-    if (payload) {
-      req.send(payload);
-    }
-    if (token) {
-      req.auth(token, '');
-    }
+    // TODO: check methods exist on superagent
   }
 }

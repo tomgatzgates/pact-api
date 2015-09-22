@@ -47,7 +47,7 @@ pact.tokens
 - bundles
   - `list()`
   - `retrieve(sku)`
-- tokens
+- token
   - `create()`
   - `del()`
 - products

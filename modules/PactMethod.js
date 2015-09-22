@@ -3,6 +3,8 @@ export default function pactMethod({method = 'get', path = ''}) {
   // TODO: urlParam munging
 
   return function makeRequest(payload) {
-    return this._request(method, path, payload);
+    const resourcePath = this.path;
+    const fullPath = resourcePath + path;
+    return this._request(method, fullPath, payload);
   };
 }
