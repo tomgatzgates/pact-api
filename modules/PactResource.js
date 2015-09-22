@@ -15,8 +15,6 @@ export default class PactResource {
     this._pactAPI = pactAPI;
     this.path = path;
 
-    // Resource path is different to method path
-
     Object.keys(methods).forEach(k => {
       this[k] = methods[k];
     });
@@ -30,8 +28,9 @@ export default class PactResource {
 
   _request(method, path, payload) {
     const base = this._pactAPI.getAPIField('base');
+    const version = this._pactAPI.getAPIField('version');
     const token = this._pactAPI.getAPIField('token');
-    const url = base + path;
+    const url = `${base}/${version}${path};`
 
     return new Promise((resolve, reject) => {
       const req = request[method](url);
