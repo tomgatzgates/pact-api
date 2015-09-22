@@ -1,7 +1,9 @@
 import Token from './resources/Token';
+import Account from './resources/Account';
 
 const resources = {
   Token,
+  Account,
 };
 
 export default class PactAPI {
