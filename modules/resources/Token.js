@@ -1,19 +1,20 @@
-class Token extends PactResource {
+import PactResource from '../PactResource';
+import pactMethod from '../pactMethod';
+
+export default class Token extends PactResource {
   constructor(pactAPI) {
+    const includeBasic = {
+      path: '/tokens',
+      methods: ['create'],
+    };
 
     const methods = {
-      retrieve: pactMethod({
-        method: 'get',
-        path: '/allTokens'
-      }),
       del: pactMethod({
         method: 'del',
-        path: '/tokens/me'
+        path: '/tokens/me',
       }),
     };
-    const path = '/tokens';
-    const includeBasic = ['create'];
 
-    super({pactAPI, methods, path, includeBasic});
+    super({pactAPI, methods, includeBasic});
   }
 }

@@ -1,92 +1,53 @@
-/* eslint key-spacing: 0 */
+import Token from './resources/Token';
 
-import invariant from 'invariant';
-import HTTPRequestable from './HTTPRequestable';
+const resources = {
+  Token,
+};
 
-/*
- * Example usage:
- *
- * ```js
- *  var api = new PactAPI('my/api/basepath', 'optionalToken');
- *  api.login(email, password).then(function(response){
- *    // Login was succesful!
- *  });
- * ```
- */
-export default class PactAPI extends HTTPRequestable {
-  constructor(base, token) {
-    super(token);
-    this.base = base;
-    this._getEndpoints = this._getEndpoints.bind(this);
-  }
-
-  _getEndpoints() {
-    return {
-      LOGIN:  `${this.base}/tokens/`,
-      LOGOUT: `${this.base}/tokens/me`,
+export default class PactAPI {
+  constructor(key, version = PactAPI.DEFAULT_VERSION, base = PactAPI.DEFAULT_BASE) {
+    this._api = {
+      version,
+      base,
+      key,
     };
+    this._prepResources();
   }
-
-  /*
-   * Set the base URL to be used by the instance.
-   */
-  setBase(base) {
-    invariant(base, `PactAPI.setBase(...): You must supply a base`);
-    this.base = base;
+  getAPIField(k) {
+    return this._api[k];
   }
-
-  login(email, password) {
-    invariant(
-      email && password,
-      `PactAPI.login(...): You must supply an email and password.
-      You passed "${email}" and "${password}".`
-    );
-
-    const {_getEndpoints} = this;
-    const _post = this._post.bind(this);
-    const setToken = this.setToken.bind(this);
-
-    return new Promise((resolve, reject) => {
-      _post(_getEndpoints().LOGIN, {
-        email,
-        password,
-      }, (err, res) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        const {token} = res.body;
-        setToken(token);
-        resolve({
-          token,
-        });
-      });
+  setAPIVersion(version) {
+    if (version) {
+      this._api.version = version;
+      this._prepResources();
+    }
+  }
+  setAPIKey(key) {
+    if (key) {
+      this._api.key = key;
+      this._prepResources();
+    }
+  }
+  setAPIBase(base) {
+    if (base) {
+      this._api.base = base;
+      this._prepResources();
+    }
+  }
+  _prepResources() {
+    Object.keys(resources).forEach(name => {
+      this[
+        name[0].toLowerCase() + name.substring(1)
+      ] = new resources[name](this);
     });
   }
-
-  logout() {
-    invariant(
-      this.token,
-      `PactAPI.logout(...): Auth token required to logout. Make sure to pass a valid token when creating a new PactAPI instance, or `
-    );
-
-    const {_getEndpoints} = this;
-    const _del = this._del.bind(this);
-
-    return new Promise((resolve, reject) => {
-      _del(
-        _getEndpoints().LOGOUT,
-        (err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(res.body);
-        }
-      );
-    });
-  }
-
-  addresses: {}
 }
 
+PactAPI.DEFAULT_HOST = 'https://api.pactcoffee.com';
+PactAPI.DEFAULT_VERSION = 'v1';
+
+// const api = new PactAPI('testKey', 'v1', 'testBase');
+// api.token.create()
+// api.token.del()
+
+// Method constants to map between HTTP and superagent

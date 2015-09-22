@@ -2,10 +2,10 @@ import PactAPI from '../modules/PactAPI';
 import superagent from 'superagent';
 
 describe('PactAPI', () => {
-
   let instance;
   const fakeBase = 'Where did you get those clothes? At the toilet store?';
   const fakeToken = 'Dorothy Mantooth is a saint';
+  const fakeVersion = 'Baxter';
 
   const reqMethods = {};
 
@@ -35,29 +35,36 @@ describe('PactAPI', () => {
   });
 
   describe('The constructor', () => {
-    it('Can be passed a base URL', () => {
-      assert.ok(new PactAPI(fakeBase).base === fakeBase);
+    it('Can be used without any args', () => {
+      assert.ok(new PactAPI().getAPIField('version'));
     });
-    it('Can be passed an auth token', () => {
-      assert.ok(new PactAPI(fakeBase, fakeToken).token === fakeToken);
+    it('Can be passed an auth key', () => {
+      assert.ok(new PactAPI(fakeToken).getAPIField('key') === fakeToken);
+    });
+    it('Can be passed a version', () => {
+      instance = new PactAPI(null, fakeVersion);
+      assert.ok(instance.getAPIField('version') === fakeVersion);
+    });
+    it('Can be passed a base URL', () => {
+      instance = new PactAPI(null, null, fakeBase);
+      assert.ok(instance.getAPIField('base') === fakeBase);
     });
   });
 
-  describe('setBase', () => {
+  describe('setAPIBase', () => {
     it('Sets the base URL for all requests', () => {
-      instance.setBase(fakeBase);
+      instance.setAPIBase(fakeBase);
       assert.ok(instance.base === fakeBase);
     });
 
     it('Throws if called without a base', () => {
-      assert['throws'](() => {
+      assert.throws(() => {
         instance.setBase();
       });
     });
   });
 
   describe('_getEndpoints', () => {
-
     it('Generates API endpoint URLs using the base URL', () => {
       instance.setBase(fakeBase);
       const endpoints = instance._getEndpoints();
@@ -84,17 +91,15 @@ describe('PactAPI', () => {
         assert.include(endpoint, 'drrrr');
       });
     });
-
   });
 
   describe('login', () => {
-
     const LOGIN = 'ron';
     const PASS = 'wholewheelofcheese';
 
     it(`Throws if the login or password aren't present`, () => {
-      assert['throws'](() => instance.login());
-      assert['throws'](() => instance.login('hurr'));
+      assert.throws(() => instance.login());
+      assert.throws(() => instance.login('hurr'));
     });
 
     it('POSTs to the correct URL', () => {
@@ -111,7 +116,7 @@ describe('PactAPI', () => {
       instance.login(LOGIN, PASS);
       assert.deepEqual(spy.lastCall.args[1], {
         email: LOGIN,
-        password: PASS
+        password: PASS,
       });
     });
 
@@ -129,7 +134,6 @@ describe('PactAPI', () => {
       });
       const prom = instance.login(LOGIN, PASS);
       assert.isRejected(prom);
-
     });
 
     it(`The promise resolves with the token`, () => {
@@ -142,7 +146,6 @@ describe('PactAPI', () => {
       const prom = instance.login(LOGIN, PASS);
       assert.isFulfilled(prom);
       assert.eventually.equal(prom, {token: fakeToken});
-
     });
 
     it('Sets the token on the PactAPI instance if the promise resolved', () => {
@@ -160,9 +163,8 @@ describe('PactAPI', () => {
   });
 
   describe('Logout', () => {
-
     it(`Throws if the token is not set on the instance`, () => {
-      assert['throws'](() => instance.logout());
+      assert.throws(() => instance.logout());
     });
 
     it('DELETEs on the correct URL', () => {

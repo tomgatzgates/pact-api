@@ -1,31 +1,43 @@
+import request from 'superagent';
+import pactMethod from './pactMethod';
+
 const basicMethods = {
   create: pactMethod({
-    method: 'post'
+    method: 'post',
   }),
   delete: pactMethod({
-    method: 'del'
-  })
-}
+    method: 'del',
+  }),
+};
 
-class PactResource {
-  constructor({pactAPI, path, includeBasic, methods}) {
+export default class PactResource {
+  constructor({pactAPI, includeBasic, methods}) {
     this._pactAPI = pactAPI;
 
     Object.keys(methods).forEach(k => {
       this[k] = methods[k];
     });
-    
+
     if (includeBasic) {
-      includeBasic.forEach(method => {
+      includeBasic.methods.forEach(method => {
         this[method] = basicMethods[method];
       }, this);
     }
   }
+
   _request(method, path, payload) {
-    console.log(`request.${method}(${path})`);
+    const base = this._pactAPI.getAPIField('base');
+    const key = this._pactAPI.getAPIField('key');
+    const url = base + path;
+
+    // TODO: check methods exist on superagent
+    const req = request[method](url);
+
     if (payload) {
-      console.log(`request.send(${payload})`);
+      req.send(payload);
     }
-    console.log(`key: ${this._pactAPI.getAPIField('key')}`);
+    if (key) {
+      req.auth(key, '');
+    }
   }
 }
