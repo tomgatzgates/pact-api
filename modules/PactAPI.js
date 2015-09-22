@@ -5,11 +5,11 @@ const resources = {
 };
 
 export default class PactAPI {
-  constructor(key, version = PactAPI.DEFAULT_VERSION, base = PactAPI.DEFAULT_BASE) {
+  constructor(token, version = PactAPI.DEFAULT_VERSION, base = PactAPI.DEFAULT_BASE) {
     this._api = {
       version,
+      token,
       base,
-      key,
     };
     this._prepResources();
   }
@@ -22,9 +22,9 @@ export default class PactAPI {
       this._prepResources();
     }
   }
-  setAPIKey(key) {
-    if (key) {
-      this._api.key = key;
+  setAPIToken(token) {
+    if (token) {
+      this._api.token = token;
       this._prepResources();
     }
   }

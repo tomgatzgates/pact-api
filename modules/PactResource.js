@@ -14,7 +14,7 @@ export default class PactResource {
   constructor({pactAPI, includeBasic, methods}) {
     this._pactAPI = pactAPI;
 
-    Object.keys(methods).forEach(k => {
+    Object.tokens(methods).forEach(k => {
       this[k] = methods[k];
     });
 
@@ -27,7 +27,7 @@ export default class PactResource {
 
   _request(method, path, payload) {
     const base = this._pactAPI.getAPIField('base');
-    const key = this._pactAPI.getAPIField('key');
+    const token = this._pactAPI.getAPIField('token');
     const url = base + path;
 
     // TODO: check methods exist on superagent
@@ -36,8 +36,8 @@ export default class PactResource {
     if (payload) {
       req.send(payload);
     }
-    if (key) {
-      req.auth(key, '');
+    if (token) {
+      req.auth(token, '');
     }
   }
 }
