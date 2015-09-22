@@ -6,26 +6,34 @@ const resources = {
 }
 
 class PactAPI {
-  constructor(key, base) {
-
+  constructor(key, version, base) {
     this._api = {
+      version,
       base,
       key,
-    }
-    this._prepResources()
+    };
+    this._prepResources();
   }
-  getApiField(key) {
+  getAPIField(key) {
     return this._api[key];
   }
-  setApiKey(key) {
+  setAPIVersion(version) {
+    if (version) {
+      this._api.version = version;
+      this._prepResources();
+    }
+  }
+  setAPIKey(key) {
     if (key) {
       this._api.key = key;
       this._prepResources();
     }
   }
-  setApiBase(base) {
-    this._api.base = base;
-    this._prepResources();
+  setAPIBase(base) {
+    if (base) {
+      this._api.base = base;
+      this._prepResources();
+    }
   }
   _prepResources() {
     for (var name in resources) {
@@ -36,6 +44,8 @@ class PactAPI {
   }
 }
 
-// const api = new PactAPI('testKey', 'testBase');
+// const api = new PactAPI('testKey', 'v1', 'testBase');
 // api.token.create()
 // api.token.del()
+
+// Method constants to map between HTTP and superagent

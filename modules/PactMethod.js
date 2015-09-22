@@ -1,33 +1,5 @@
-import request from 'superagent';
-import invariant from 'invariant';
-
-function pactMethod({method, path, includeBasic}) {
-  return () => {
-    if (includeBasic) {
-      includeBasic.forEach(method => {
-        this[method] = this.request.bind(this, method, path);
-      });
-    } 
+function pactMethod({method, path}) {
+  return function(payload) {
+    return this._request(method, path, payload);
   }
-}
-
-const basicMethods = {
-  create: pactMethod({
-    method: 'post',
-  }),
-
-  list: pactMethod({
-    method: 'get',
-  }),
-
-  retrieve: pactMethod({
-    method: 'get',
-    path: '/{id}',
-    urlParams: ['id'],
-  }),
-
-  update: pactMethod({
-    method: 'post',
-    path: ''
-  }),
 }
