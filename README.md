@@ -6,31 +6,75 @@ PactAPI
 Each async method returns a [promise](http://www.html5rocks.com/en/tutorials/es6/promises/).
 
 
-Usage
-=====
+Please note
+-----------
 
 **This project currently requires the use of a module build tool like browserify or webpack**. The output `dist` is simply babel transformed code to ES5. In future this could be a completely packaged dist.
 
-### Constructor `new PactAPI(base, ?token)`
+API Usage
+---------
 
-- `base` is the URL of the API
-- `token` is an optional authentication token
+Each resource can be access from your `pact-api` instance:
 
-### `setBase(newBase)`
+```js
+import PactAPI from 'pact-api';
 
-Set the base URL to the given base.
+const pact = new PactAPI();
+// pact.{RESOURCE_NAME}.{METHOD_NAME}
+```
 
-### `setToken(token)`
+### Constructor `new PactAPI(?token, ?version, ?base)`
 
-Set the auth token on the instance. **Note:** On `login`, the instance will automatically set the token.
+- `token`: optional token to auth requests with (default `undefined`)
+- `version`: optional version of the API to hit (default `v1`)
+- `base`: optinal base url used for requests (default `https://api.pactcoffee.com`)
 
-### `login(email, password).then({token}, err)`
+### Handling reqests
 
-Login to the API, returning the auth token. This method automatically calls `setToken` on the instance, authenticating future calls.
+Each method returns a promise:
 
-### `logout().then(response, err)`
+```js
+pact.tokens
+  .create({email: 'hurr', password: 'durr'})
+  .then(
+    (body) => return pact.tokens.del(),
+    (err) => throw new Error(error)
+  );
+```
 
-Log out of the API using the currently-set auth token
+### Available resources & methods
+
+- bundles
+  - `list()`
+  - `retrieve(sku)`
+- tokens
+  - `create()`
+  - `del()`
+- products
+  - `list()`
+  - `retrieve(sku)`
+- users
+  - `current()`
+- addresses
+  - `list()`
+  - `create({params})`
+  - `retrieve(id)`
+  - `update({params})`
+  - `del(id)`
+- recurrables
+  - `list()`
+  - `create({params})`
+  - `retrieve(id)`
+  - `update({params})`
+  - `del(id)`
+- orders
+  - `list()`
+  - `create({params})`
+  - `retrieve(id)`
+  - `update({params})`
+  - `del(id)`
+- account
+  - `fetch`
 
 
 Running tests
