@@ -1,9 +1,21 @@
-import Token from './resources/Token';
+import Recurrables from './resources/Recurrables';
+import Addresses from './resources/Addresses';
+import Products from './resources/Products';
 import Account from './resources/Account';
+import Bundles from './resources/Bundles';
+import Orders from './resources/Orders';
+import Token from './resources/Token';
+import Ping from './resources/Ping';
 
 const resources = {
-  Token,
+  Recurrables,
+  Addresses,
+  Products,
   Account,
+  Bundles,
+  Orders,
+  Token,
+  Ping,
 };
 
 export default class PactAPI {
@@ -47,9 +59,3 @@ export default class PactAPI {
 
 PactAPI.DEFAULT_HOST = 'https://api.pactcoffee.com';
 PactAPI.DEFAULT_VERSION = 'v1';
-
-// const api = new PactAPI('testKey', 'v1', 'testBase');
-// api.token.create()
-// api.token.del()
-
-// Method constants to map between HTTP and superagent
