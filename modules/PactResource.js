@@ -1,17 +1,39 @@
 import request from 'superagent';
+
 import pactMethod from './pactMethod';
+import methods from './methods';
 
 const basicMethods = {
-  create: pactMethod({
-    method: 'post',
+  // List records from the API
+  list: pactMethod({
+    method: methods.GET,
   }),
-  delete: pactMethod({
-    method: 'del',
+  // Retrieve a specific record from the API
+  retrieve: pactMethod({
+    method: methods.GET,
+    urlParams: ['id'],
+    path: '{id}',
+  }),
+  // Create a record
+  create: pactMethod({
+    method: methods.POST,
+  }),
+  // Update an existing record
+  update: pactMethod({
+    method: methods.PATCH,
+    urlParams: ['id'],
+    path: '{id}',
+  }),
+  // Delete a record
+  del: pactMethod({
+    method: methods.DELETE,
+    urlParams: ['id'],
+    path: '{id}',
   }),
 };
 
 export default class PactResource {
-  constructor({pactAPI, path, includeBasic, methods}) {
+  constructor({path, includeBasic, methods}) {
     this._pactAPI = pactAPI;
     this.path = path;
 
@@ -48,7 +70,5 @@ export default class PactResource {
         resolve(res.body);
       });
     });
-
-    // TODO: check methods exist on superagent
   }
 }

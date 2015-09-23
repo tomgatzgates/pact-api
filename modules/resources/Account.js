@@ -1,5 +1,6 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
+import methods from '../methods';
 
 export default class Account extends PactResource {
   constructor(pactAPI) {
@@ -7,7 +8,7 @@ export default class Account extends PactResource {
 
     const methods = {
       fetch: pactMethod({
-        method: 'get',
+        method: methods.GET,
       }),
     };
 
