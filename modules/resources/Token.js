@@ -1,6 +1,6 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
-import methods from '../methods';
+import methodTypes from '../methodTypes';
 
 export default class Token extends PactResource {
   constructor(pactAPI) {
@@ -10,7 +10,7 @@ export default class Token extends PactResource {
 
     const methods = {
       del: pactMethod({
-        method: methods.DELETE,
+        method: methodTypes.DELETE,
         path: '/me',
       }),
     };

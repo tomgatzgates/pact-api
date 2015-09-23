@@ -1,39 +1,39 @@
 import request from 'superagent';
 
 import pactMethod from './pactMethod';
-import methods from './methods';
+import methodTypes from './methodTypes';
 
 const basicMethods = {
   // List records from the API
   list: pactMethod({
-    method: methods.GET,
+    method: methodTypes.GET,
   }),
   // Retrieve a specific record from the API
   retrieve: pactMethod({
-    method: methods.GET,
+    method: methodTypes.GET,
     urlParams: ['id'],
     path: '{id}',
   }),
   // Create a record
   create: pactMethod({
-    method: methods.POST,
+    method: methodTypes.POST,
   }),
   // Update an existing record
   update: pactMethod({
-    method: methods.PATCH,
+    method: methodTypes.PATCH,
     urlParams: ['id'],
     path: '{id}',
   }),
   // Delete a record
   del: pactMethod({
-    method: methods.DELETE,
+    method: methodTypes.DELETE,
     urlParams: ['id'],
     path: '{id}',
   }),
 };
 
 export default class PactResource {
-  constructor({path, includeBasic, methods}) {
+  constructor({pactAPI, path, includeBasic = [], methods = []}) {
     this._pactAPI = pactAPI;
     this.path = path;
 
@@ -52,7 +52,7 @@ export default class PactResource {
     const base = this._pactAPI.getAPIField('base');
     const version = this._pactAPI.getAPIField('version');
     const token = this._pactAPI.getAPIField('token');
-    const url = `${base}/${version}${path};`
+    const url = `${base}/${version}${path}`;
 
     return new Promise((resolve, reject) => {
       const req = request[method](url);

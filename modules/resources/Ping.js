@@ -1,6 +1,5 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
-import methods from '../methods';
 
 export default class Ping extends PactResource {
   constructor(pactAPI) {

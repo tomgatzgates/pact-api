@@ -1,6 +1,5 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
-import methods from '../methods';
 
 export default class Addresses extends PactResource {
   constructor(pactAPI) {
@@ -12,6 +11,6 @@ export default class Addresses extends PactResource {
       'update',
       'del'
     ];
-    super({pactAPI, path, includeBasic, methods});
+    super({pactAPI, path, includeBasic});
   }
 }

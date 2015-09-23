@@ -1,6 +1,6 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
-import methods from '../methods';
+import methodTypes from '../methodTypes';
 
 export default class Products extends PactResource {
   constructor(pactAPI) {
@@ -8,7 +8,7 @@ export default class Products extends PactResource {
     const includeBasic = ['list'];
     const methods = {
       retrieve: pactMethod({
-        method: methods.GET,
+        method: methodTypes.GET,
         urlParams: ['sku'],
         path: '{sku}',
       }),

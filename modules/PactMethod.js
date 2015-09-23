@@ -1,19 +1,12 @@
 import {makeURLInterpolator} from './util';
-import methods from './methods';
+import methodTypes from './methodTypes';
 
 // This fn to be used from inside a PactResource class/subclass only
 export default function pactMethod({
-  method = methods.GET,
+  method = methodTypes.GET,
   path = '',
   urlParams = [],
 }) {
-  if (!methods[method]) {
-    throw new Error(
-      `PactAPI: No method exists for '${method}'. Your options are: ` +
-      Object.keys(methods)
-    );
-  }
-
   const pathGenerator = makeURLInterpolator(path);
 
   return function makeRequest(payload) {

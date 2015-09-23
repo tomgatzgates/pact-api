@@ -1,6 +1,6 @@
 import PactResource from '../PactResource';
 import pactMethod from '../pactMethod';
-import methods from '../methods';
+import methodTypes from '../methodTypes';
 
 export default class Bundles extends PactResource {
   constructor(pactAPI) {
@@ -8,10 +8,10 @@ export default class Bundles extends PactResource {
 
     const methods = {
       list: pactMethod({
-        method: methods.GET,
+        method: methodTypes.GET,
       }),
       retrieve: pactMethod({
-        method: methods.GET,
+        method: methodTypes.GET,
         urlParams: ['sku'],
         path: '{sku}',
       }),
