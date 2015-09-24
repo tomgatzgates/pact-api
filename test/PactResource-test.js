@@ -82,6 +82,9 @@ describe('PactResource', () => {
   describe('When requesting...', () => {
     beforeEach(() => {
       ['get', 'put', 'post', 'del'].forEach((method) => {
+        if (superagent[method].restore) {
+          superagent[method].restore();
+        }
         sinon.stub(superagent, method).returns(reqMethods);
       });
       sendSpy.reset();
@@ -94,14 +97,18 @@ describe('PactResource', () => {
     });
     afterEach(() => {
       ['get', 'put', 'post', 'del'].forEach((method) => {
-        superagent[method].restore();
+        if (superagent[method].restore) {
+          superagent[method].restore();
+        }
       });
     });
 
     it('Calls the correct method on superagent', () => {
       ['get', 'put', 'post', 'del'].forEach(method => {
+        if (superagent[method].restore) {
+          superagent[method].restore();
+        }
         const spy = sinon.spy();
-        superagent[method].restore();
         sinon.stub(superagent, method, spy);
 
         instance._request(method, '/testPath');

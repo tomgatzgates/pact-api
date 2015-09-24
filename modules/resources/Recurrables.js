@@ -1,5 +1,4 @@
 import PactResource from '../PactResource';
-import pactMethod from '../pactMethod';
 
 export default class Recurrables extends PactResource {
   constructor(pactAPI) {
@@ -9,7 +8,7 @@ export default class Recurrables extends PactResource {
       'retrieve',
       'create',
       'update',
-      'del'
+      'del',
     ];
     super({pactAPI, path, includeBasic});
   }

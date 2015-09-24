@@ -8,7 +8,7 @@ describe('pactMethod', () => {
     });
   });
 
-  it('Returns a function that performs a request', () => {
+  it('Returns a function that performs a request on it\'s PactResource parent', () => {
     const spy = sinon.spy();
 
     // This is what pactMethod expects to be on it's `this` value
@@ -54,7 +54,7 @@ describe('pactMethod', () => {
     mockPactResource.mock();
     assert.ok(spy.calledWith(
       'post',
-      'testPath/longer-path',
+      'testPath/longer-path'
     ));
   });
 
@@ -75,7 +75,7 @@ describe('pactMethod', () => {
       mockPactResource.mock({id: 'testId'});
       assert.ok(spy.calledWith(
         'get',
-        'testPath/testId',
+        'testPath/testId'
       ));
     });
 
@@ -110,7 +110,7 @@ describe('pactMethod', () => {
       assert.ok(spy.calledWith(
         'post',
         'testPath/testId',
-        {foo: 'bar'},
+        {foo: 'bar'}
       ));
     });
   });

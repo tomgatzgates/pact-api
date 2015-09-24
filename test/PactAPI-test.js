@@ -1,4 +1,5 @@
 import PactAPI from '../modules/PactAPI';
+import superagent from 'superagent';
 
 describe('PactAPI', () => {
   let instance;
@@ -70,9 +71,26 @@ describe('PactAPI', () => {
         'orders',
         'token',
         'ping',
-        ].forEach(resource => {
-          assert.isObject(instance[resource]);
-        });
+      ].forEach(resource => {
+        assert.isObject(instance[resource]);
+      });
+    });
+
+    it('Have methods that can be called', () => {
+      const mockResp = {body: 'mock response'};
+
+      if (superagent.post.restore) {
+        superagent.post.restore();
+      }
+      sinon.stub(superagent, 'post', (url, params, callback) => {
+        callback(null, mockResp);
+      });
+
+
+      const prom = instance.recurrables.create();
+
+      assert.isFulfilled(prom);
+      assert.eventually.equal(prom, mockResp.body);
     });
   });
 });

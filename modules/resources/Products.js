@@ -12,7 +12,7 @@ export default class Products extends PactResource {
         urlParams: ['sku'],
         path: '{sku}',
       }),
-    }
+    };
     super({pactAPI, path, includeBasic, methods});
   }
 }
