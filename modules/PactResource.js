@@ -34,6 +34,17 @@ const basicMethods = {
 
 export default class PactResource {
   constructor({pactAPI, path, includeBasic = [], methods = []}) {
+    if (!pactAPI) {
+      throw new Error(
+        `PactResource: Expected PactAPI instance, got "${pactAPI}"`
+      );
+    }
+    if (!path) {
+      throw new Error(
+        `PactResource: Expected path, got "${path}"`
+      );
+    }
+
     this._pactAPI = pactAPI;
     this.path = path;
 
@@ -43,6 +54,11 @@ export default class PactResource {
 
     if (includeBasic) {
       includeBasic.forEach(method => {
+        if (!basicMethods[method]) {
+          throw new Error(
+            `PactResource: No basic method exists for "${method}". Your options are ${Object.keys(basicMethods)}`
+          );
+        }
         this[method] = basicMethods[method];
       }, this);
     }
