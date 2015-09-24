@@ -20,7 +20,7 @@ export const makeURLInterpolator = (function() { // eslint-disable-line
         .replace(/["\n\r\u2028\u2029]/g, function($0) { // eslint-disable-line
           return rc[$0];
         })
-        .replace(/\{([\s\S]+?)\}/g, '" + o["$1"] + "')
+        .replace(/\{([\s\S]+?)\}/g, '" + encodeURIComponent(o["$1"]) + "')
       ) + '";'
     );
   };
