@@ -1,4 +1,5 @@
 import Recurrables from './resources/Recurrables';
+import OrderItems from './resources/OrderItems';
 import Addresses from './resources/Addresses';
 import Products from './resources/Products';
 import Account from './resources/Account';
@@ -9,6 +10,7 @@ import Ping from './resources/Ping';
 
 const resources = {
   Recurrables,
+  OrderItems,
   Addresses,
   Products,
   Account,
