@@ -12,7 +12,7 @@ const basicMethods = {
   retrieve: pactMethod({
     method: methodTypes.GET,
     urlParams: ['id'],
-    path: '/{id}',
+    path: '{id}',
   }),
   // Create a record
   create: pactMethod({
@@ -22,13 +22,13 @@ const basicMethods = {
   update: pactMethod({
     method: methodTypes.PATCH,
     urlParams: ['id'],
-    path: '/{id}',
+    path: '{id}',
   }),
   // Delete a record
   del: pactMethod({
     method: methodTypes.DELETE,
     urlParams: ['id'],
-    path: '/{id}',
+    path: '{id}',
   }),
 };
 

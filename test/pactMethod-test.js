@@ -36,10 +36,10 @@ describe('pactMethod', () => {
       method: 'patch',
     });
     mockPactResource.mock();
-    assert.ok(spy.calledWith('patch', 'testPath'));
+    assert.ok(spy.calledWith('patch', 'testPath/'));
   });
 
-  it('Accepts a "path" argument, building the correct URL', () => {
+  it('Accepts a relative "path" argument, building the correct URL', () => {
     const spy = sinon.spy();
 
     const mockPactResource = {
@@ -49,7 +49,7 @@ describe('pactMethod', () => {
 
     mockPactResource.mock = pactMethod({
       method: 'post',
-      path: '/longer-path',
+      path: 'longer-path',
     });
     mockPactResource.mock();
     assert.ok(spy.calledWith(
@@ -69,7 +69,7 @@ describe('pactMethod', () => {
 
       mockPactResource.mock = pactMethod({
         method: 'get',
-        path: '/{id}',
+        path: '{id}',
         urlParams: ['id'],
       });
       mockPactResource.mock({id: 'testId'});
@@ -88,7 +88,7 @@ describe('pactMethod', () => {
 
       mockPactResource.mock = pactMethod({
         method: 'get',
-        path: '/{id}',
+        path: '{id}',
         urlParams: ['id'],
       });
       assert.throws(() => mockPactResource.mock({}));
@@ -103,7 +103,7 @@ describe('pactMethod', () => {
 
       mockPactResource.mock = pactMethod({
         method: 'post',
-        path: '/{id}',
+        path: '{id}',
         urlParams: ['id'],
       });
       mockPactResource.mock({id: 'testId', foo: 'bar'});
