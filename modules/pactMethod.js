@@ -29,7 +29,7 @@ export default function pactMethod({
     });
 
     const resourcePath = this.path;
-    const fullPath = resourcePath + pathGenerator(urlData);
+    const fullPath = `${resourcePath}/${pathGenerator(urlData)}`;
     return this._request(method, fullPath, payload);
   };
 }
