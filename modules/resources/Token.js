@@ -11,7 +11,7 @@ export default class Token extends PactResource {
     const methods = {
       del: pactMethod({
         method: methodTypes.DELETE,
-        path: '/me',
+        path: 'me',
       }),
     };
 
