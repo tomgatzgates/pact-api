@@ -8,32 +8,32 @@ export default class OrderItems extends PactResource {
     const methods = {
       list: pactMethod({
         method: methodTypes.GET,
-        urlParams: ['order_id'],
-        path: '{order_id}/items',
+        urlParams: ['orderId'],
+        path: '{orderId}/items',
       }),
       // Retrieve a specific record from the API
       retrieve: pactMethod({
         method: methodTypes.GET,
-        urlParams: ['order_id', 'id'],
-        path: '{order_id}/items/{id}',
+        urlParams: ['orderId', 'id'],
+        path: '{orderId}/items/{id}',
       }),
       // Create a record
       create: pactMethod({
         method: methodTypes.POST,
-        urlParams: ['order_id'],
-        path: '{order_id}/items',
+        urlParams: ['orderId'],
+        path: '{orderId}/items',
       }),
       // Update an existing record
       update: pactMethod({
         method: methodTypes.PATCH,
-        urlParams: ['order_id', 'id'],
-        path: '{order_id}/items/{id}',
+        urlParams: ['orderId', 'id'],
+        path: '{orderId}/items/{id}',
       }),
       // Delete a record
       del: pactMethod({
         method: methodTypes.DELETE,
-        urlParams: ['order_id', 'id'],
-        path: '{order_id}/items/{id}',
+        urlParams: ['orderId', 'id'],
+        path: '{orderId}/items/{id}',
       }),
     };
 
