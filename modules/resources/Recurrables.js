@@ -1,4 +1,6 @@
 import PactResource from '../PactResource';
+import pactMethod from '../pactMethod';
+import methodTypes from '../methodTypes';
 
 export default class Recurrables extends PactResource {
   constructor(pactAPI) {
@@ -10,6 +12,20 @@ export default class Recurrables extends PactResource {
       'update',
       'del',
     ];
-    super({pactAPI, path, includeBasic});
+
+    const methods = {
+      unpause: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['id'],
+        path: '{id}/activate',
+      }),
+      pause: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['id'],
+        path: '{id}/pause',
+      }),
+    };
+
+    super({pactAPI, path, includeBasic, methods});
   }
 }
