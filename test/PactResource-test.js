@@ -65,7 +65,7 @@ describe('PactResource', () => {
       });
     });
 
-    describe('"methods" array argument', () => {
+    describe('"methods" object argument', () => {
       it('Adds the given method onto the PactResource instance', () => {
         instance = new PactResource({
           pactAPI: mockAPI,
