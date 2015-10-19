@@ -7,6 +7,7 @@ import Account from './resources/Account';
 import Bundles from './resources/Bundles';
 import Orders from './resources/Orders';
 import Token from './resources/Token';
+import Users from './resources/Users';
 import Ping from './resources/Ping';
 
 const resources = {
@@ -19,6 +20,7 @@ const resources = {
   Bundles,
   Orders,
   Token,
+  Users,
   Ping,
 };
 
