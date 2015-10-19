@@ -75,6 +75,9 @@ pact.tokens
   - `del(id)`
 - account
   - `fetch`
+- identities
+  - `findOrCreate({params})`
+  - `update({params})`
 
 
 Running tests
