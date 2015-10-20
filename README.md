@@ -54,7 +54,7 @@ pact.tokens
   - `list()`
   - `retrieve(sku)`
 - users
-  - `current()`
+  - `create({params})`
 - addresses
   - `list()`
   - `create({params})`
@@ -75,6 +75,9 @@ pact.tokens
   - `del(id)`
 - account
   - `fetch`
+- identities
+  - `create({params})`
+  - `update({params})`
 
 
 Running tests
