@@ -7,7 +7,7 @@ export default class Identity extends PactResource {
     const path = '/identities';
 
     const methods = {
-      findOrCreate: pactMethod({
+      create: pactMethod({
         method: methodTypes.POST,
       }),
       update: pactMethod({
