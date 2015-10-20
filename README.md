@@ -76,7 +76,7 @@ pact.tokens
 - account
   - `fetch`
 - identities
-  - `findOrCreate({params})`
+  - `create({params})`
   - `update({params})`
 
 
