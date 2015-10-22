@@ -3,6 +3,7 @@ import OrderItems from './resources/OrderItems';
 import Identities from './resources/Identities';
 import Addresses from './resources/Addresses';
 import Products from './resources/Products';
+import Validate from './resources/Validate';
 import Account from './resources/Account';
 import Bundles from './resources/Bundles';
 import Orders from './resources/Orders';
@@ -16,6 +17,7 @@ const resources = {
   Identities,
   Addresses,
   Products,
+  Validate,
   Account,
   Bundles,
   Orders,
