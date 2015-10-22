@@ -53,6 +53,7 @@ pact.tokens
 - products
   - `list()`
   - `retrieve(sku)`
+  - `coffee()`
 - users
   - `create({params})`
 - addresses
@@ -74,10 +75,14 @@ pact.tokens
   - `update({params})`
   - `del(id)`
 - account
-  - `fetch`
+  - `fetch()`
 - identities
   - `create({params})`
   - `update({params})`
+- validate
+  - `password({password})`
+  - `address({params})`
+  - `voucher({params})`
 
 
 Running tests
