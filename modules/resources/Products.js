@@ -12,7 +12,12 @@ export default class Products extends PactResource {
         urlParams: ['sku'],
         path: '{sku}',
       }),
+      coffee: pactMethod({
+        method: methodTypes.GET,
+        path: 'coffee',
+      }),
     };
+
     super({pactAPI, path, includeBasic, methods});
   }
 }
