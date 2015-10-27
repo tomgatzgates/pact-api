@@ -36,7 +36,7 @@ describe('pactMethod', () => {
       method: 'patch',
     });
     mockPactResource.mock();
-    assert.ok(spy.calledWith('patch', 'testPath/'));
+    assert.ok(spy.calledWith('patch', 'testPath'));
   });
 
   it('Accepts a relative "path" argument, building the correct URL', () => {
@@ -79,7 +79,7 @@ describe('pactMethod', () => {
       ));
     });
 
-    it('Throws if a urlParam is requried but not passed in the payload', () => {
+    it('Throws if a urlParam is required but not passed in the payload', () => {
       const spy = sinon.spy();
       const mockPactResource = {
         _request: spy,
@@ -94,7 +94,7 @@ describe('pactMethod', () => {
       assert.throws(() => mockPactResource.mock({}));
     });
 
-    it('Leaves the rest of the payload alone', () => {
+    it('Leaves the rest of the payload alone, passing it into the request', () => {
       const spy = sinon.spy();
       const mockPactResource = {
         _request: spy,
@@ -111,6 +111,28 @@ describe('pactMethod', () => {
         'post',
         'testPath/testId',
         {foo: 'bar'}
+      ));
+    });
+  });
+
+  describe('"queryParams" argument', () => {
+    it('Are optional');
+    it('Interpolates query params from the payload', () => {
+      const spy = sinon.spy();
+
+      const mockPactResource = {
+        _request: spy,
+        path: 'testPath',
+      };
+
+      mockPactResource.mock = pactMethod({
+        method: 'get',
+        queryParams: ['foo', 'bar'],
+      });
+      mockPactResource.mock({foo: 'baz', bar: 'qux'});
+      assert.ok(spy.calledWith(
+        'get',
+        'testPath?foo=baz&bar=qux'
       ));
     });
   });

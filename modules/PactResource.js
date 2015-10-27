@@ -7,6 +7,7 @@ const basicMethods = {
   // List records from the API
   list: pactMethod({
     method: methodTypes.GET,
+    queryParams: ['page', 'per_page'],
   }),
   // Retrieve a specific record from the API
   retrieve: pactMethod({
