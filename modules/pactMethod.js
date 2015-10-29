@@ -22,7 +22,7 @@ export default function pactMethod({
 }) {
   const pathGenerator = makeURLInterpolator(path);
 
-  return function makeRequest(payload) {
+  return function makeRequest(payload = {}) {
     const urlData = {};
     const queryData = {};
 
