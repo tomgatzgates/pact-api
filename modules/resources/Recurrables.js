@@ -10,7 +10,6 @@ export default class Recurrables extends PactResource {
       'retrieve',
       'create',
       'update',
-      'del',
     ];
 
     const methods = {
@@ -23,6 +22,11 @@ export default class Recurrables extends PactResource {
         method: methodTypes.PATCH,
         urlParams: ['id'],
         path: '{id}/pause',
+      }),
+      cancel: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['id'],
+        path: '{id}/cancel',
       }),
     };
 
