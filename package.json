@@ -1,6 +1,6 @@
 {
   "name": "@pactcoffee/pact-api",
-  "version": "3.6.1",
+  "version": "4.0.0",
   "description": "JavaScript wrapper around Pact's APIs for server & browser.",
   "main": "lib/PactAPI.js",
   "scripts": {
