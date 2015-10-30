@@ -5,19 +5,46 @@ import methodTypes from '../methodTypes';
 export default class Products extends PactResource {
   constructor(pactAPI) {
     const path = '/products';
-    const includeBasic = ['list'];
     const methods = {
+      list: pactMethod({
+        method: methodTypes.GET,
+        queryParams: ['sku', 'available', 'page', 'per_page'],
+      }),
+      listBundles: pactMethod({
+        method: methodTypes.GET,
+        path: 'bundle',
+        queryParams: ['sku', 'available', 'page', 'per_page'],
+      }),
+      listHardwares: pactMethod({
+        method: methodTypes.GET,
+        path: 'hardware',
+        queryParams: ['sku', 'available', 'page', 'per_page'],
+      }),
+      listCoffees: pactMethod({
+        method: methodTypes.GET,
+        path: 'coffee',
+        queryParams: [
+          'sku',
+          'available',
+          'preparation',
+          'best_for',
+          'decaf',
+          'limited',
+          'origin',
+          'producer',
+          'varietal',
+          'altitude',
+          'page',
+          'per_page',
+        ],
+      }),
       retrieve: pactMethod({
         method: methodTypes.GET,
         urlParams: ['sku'],
         path: '{sku}',
       }),
-      coffee: pactMethod({
-        method: methodTypes.GET,
-        path: 'coffee',
-      }),
     };
 
-    super({pactAPI, path, includeBasic, methods});
+    super({pactAPI, path, methods});
   }
 }

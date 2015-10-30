@@ -51,9 +51,11 @@ pact.tokens
   - `create()`
   - `del()`
 - products
-  - `list()`
+  - `list({queryParams})`
+  - `listCoffees({queryParams})`
+  - `listBundles({queryParams})`
+  - `listHardwares({queryParams})`
   - `retrieve(sku)`
-  - `coffee()`
 - users
   - `create({params})`
 - addresses
