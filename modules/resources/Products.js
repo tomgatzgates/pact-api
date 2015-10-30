@@ -10,22 +10,17 @@ export default class Products extends PactResource {
         method: methodTypes.GET,
         queryParams: ['sku', 'available', 'page', 'per_page'],
       }),
-      retrieve: pactMethod({
-        method: methodTypes.GET,
-        urlParams: ['sku'],
-        path: '{sku}',
-      }),
-      bundle: pactMethod({
+      listBundles: pactMethod({
         method: methodTypes.GET,
         path: 'bundle',
         queryParams: ['sku', 'available', 'page', 'per_page'],
       }),
-      hardware: pactMethod({
+      listHardwares: pactMethod({
         method: methodTypes.GET,
         path: 'hardware',
         queryParams: ['sku', 'available', 'page', 'per_page'],
       }),
-      coffee: pactMethod({
+      listCoffees: pactMethod({
         method: methodTypes.GET,
         path: 'coffee',
         queryParams: [
@@ -42,6 +37,11 @@ export default class Products extends PactResource {
           'page',
           'per_page',
         ],
+      }),
+      retrieve: pactMethod({
+        method: methodTypes.GET,
+        urlParams: ['sku'],
+        path: '{sku}',
       }),
     };
 

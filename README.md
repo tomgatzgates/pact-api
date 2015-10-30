@@ -52,10 +52,10 @@ pact.tokens
   - `del()`
 - products
   - `list({queryParams})`
+  - `listCoffees({queryParams})`
+  - `listBundles({queryParams})`
+  - `listHardwares({queryParams})`
   - `retrieve(sku)`
-  - `coffee({queryParams})`
-  - `bundle({queryParams})`
-  - `hardware({queryParams})`
 - users
   - `create({params})`
 - addresses
