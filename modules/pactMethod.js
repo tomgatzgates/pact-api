@@ -6,7 +6,11 @@ import methodTypes from './methodTypes';
 function buildURL(base, path, queryObj) {
   let fullPath;
   if (Object.keys(queryObj).length) {
-    fullPath = `${base}${path ? '/' + path : ''}?${qs.stringify(queryObj)}`;
+    const query = qs.stringify(queryObj, {
+      arrayFormat: 'brackets',
+      encode: false,
+    });
+    fullPath = `${base}${path ? '/' + path : ''}?${query}`;
   } else {
     fullPath = `${base}${path ? '/' + path : ''}`;
   }
