@@ -15,7 +15,13 @@ export default class Orders extends PactResource {
     const methods = {
       list: pactMethod({
         method: methodTypes.GET,
-        queryParams: ['states', 'per_page', 'page'],
+        queryParams: [
+          'states',
+          'per_page',
+          'page',
+          'sort',
+          'order',
+        ],
       }),
     };
 
