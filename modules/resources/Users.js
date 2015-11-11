@@ -11,6 +11,12 @@ export default class Users extends PactResource {
         method: methodTypes.POST,
       }),
 
+      changePassword: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['user_id'],
+        path: '{user_id}/password',
+      }),
+
       pauseMe: pactMethod({
         method: methodTypes.PATCH,
         path: 'me/pause',
