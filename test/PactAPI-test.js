@@ -82,7 +82,6 @@ describe('PactAPI', () => {
         'recurrables',
         'addresses',
         'products',
-        'account',
         'bundles',
         'orders',
         'token',
