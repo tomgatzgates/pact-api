@@ -10,6 +10,16 @@ export default class Users extends PactResource {
       create: pactMethod({
         method: methodTypes.POST,
       }),
+
+      pauseMe: pactMethod({
+        method: methodTypes.PATCH,
+        path: 'me/pause',
+      }),
+
+      activateMe: pactMethod({
+        method: methodTypes.PATCH,
+        path: 'me/activate',
+      }),
     };
 
     super({pactAPI, path, methods});
