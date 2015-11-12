@@ -2,6 +2,7 @@ import Recurrables from './resources/Recurrables';
 import OrderItems from './resources/OrderItems';
 import Identities from './resources/Identities';
 import Addresses from './resources/Addresses';
+import Vouchers from './resources/Vouchers';
 import Products from './resources/Products';
 import Validate from './resources/Validate';
 import Bundles from './resources/Bundles';
@@ -15,6 +16,7 @@ const resources = {
   OrderItems,
   Identities,
   Addresses,
+  Vouchers,
   Products,
   Validate,
   Bundles,
