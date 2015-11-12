@@ -13,7 +13,7 @@ export default class Recurrables extends PactResource {
     ];
 
     const methods = {
-      unpause: pactMethod({
+      activate: pactMethod({
         method: methodTypes.PATCH,
         urlParams: ['id'],
         path: '{id}/activate',
