@@ -22,6 +22,12 @@ export default class Users extends PactResource {
         urlParams: ['user_id'],
         path: '{user_id}',
       }),
+
+      updatePayment: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['user_id'],
+        path: '{user_id}/card',
+      }),
     };
 
     super({pactAPI, path, methods});
