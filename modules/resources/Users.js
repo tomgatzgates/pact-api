@@ -16,16 +16,6 @@ export default class Users extends PactResource {
         urlParams: ['user_id'],
         path: '{user_id}/password',
       }),
-
-      pauseMe: pactMethod({
-        method: methodTypes.PATCH,
-        path: 'me/pause',
-      }),
-
-      activateMe: pactMethod({
-        method: methodTypes.PATCH,
-        path: 'me/activate',
-      }),
     };
 
     super({pactAPI, path, methods});
