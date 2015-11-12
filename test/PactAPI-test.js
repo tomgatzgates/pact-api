@@ -39,7 +39,7 @@ describe('PactAPI', () => {
       assert.equal(instance._api.token, false);
       instance.setAPIToken(undefined);
       assert.equal(instance._api.token, undefined);
-    })
+    });
   });
 
   describe('setAPIBase', () => {
@@ -79,14 +79,17 @@ describe('PactAPI', () => {
   describe('Resources', () => {
     it('Exist on the instance', () => {
       [
-        'recurrables',
         'addresses',
-        'products',
-        'account',
         'bundles',
+        'identities',
+        'orderItems',
         'orders',
-        'token',
         'ping',
+        'products',
+        'recurrables',
+        'token',
+        'users',
+        'validate',
       ].forEach(resource => {
         assert.isObject(instance[resource]);
       });

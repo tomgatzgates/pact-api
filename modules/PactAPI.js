@@ -4,7 +4,6 @@ import Identities from './resources/Identities';
 import Addresses from './resources/Addresses';
 import Products from './resources/Products';
 import Validate from './resources/Validate';
-import Account from './resources/Account';
 import Bundles from './resources/Bundles';
 import Orders from './resources/Orders';
 import Token from './resources/Token';
@@ -18,7 +17,6 @@ const resources = {
   Addresses,
   Products,
   Validate,
-  Account,
   Bundles,
   Orders,
   Token,

@@ -10,6 +10,12 @@ export default class Users extends PactResource {
       create: pactMethod({
         method: methodTypes.POST,
       }),
+
+      changePassword: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['user_id'],
+        path: '{user_id}/password',
+      }),
     };
 
     super({pactAPI, path, methods});
