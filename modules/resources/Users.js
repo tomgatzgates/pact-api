@@ -28,6 +28,12 @@ export default class Users extends PactResource {
         urlParams: ['user_id'],
         path: '{user_id}/card',
       }),
+
+      applyVoucher: pactMethod({
+        method: methodTypes.POST,
+        urlParams: ['user_id'],
+        path: '{user_id}/vouchers',
+      }),
     };
 
     super({pactAPI, path, methods});
