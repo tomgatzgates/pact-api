@@ -40,6 +40,12 @@ export default class Users extends PactResource {
         urlParams: ['user_id'],
         path: '{user_id}/vouchers',
       }),
+
+      cancel: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['user_id'],
+        path: '{user_id}/cancel',
+      }),
     };
 
     super({pactAPI, path, methods});
