@@ -46,6 +46,29 @@ export default class Users extends PactResource {
         urlParams: ['user_id'],
         path: '{user_id}/cancel',
       }),
+
+      listUniqueCoffees: pactMethod({
+        method: methodTypes.GET,
+        path: 'me/coffees',
+        queryParams: [
+          'states',
+          'per_page',
+          'page',
+          'sort',
+          'order',
+        ],
+      }),
+
+      rateCoffee: pactMethod({
+        method: methodTypes.POST,
+        path: 'me/coffee-ratings',
+      }),
+
+      deleteCoffeeRating: pactMethod({
+        method: methodTypes.DELETE,
+        urlParams: ['sku'],
+        path: 'me/coffee-ratings/{sku}',
+      }),
     };
 
     super({pactAPI, path, methods});
