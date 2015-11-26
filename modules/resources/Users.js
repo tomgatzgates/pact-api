@@ -69,6 +69,12 @@ export default class Users extends PactResource {
         urlParams: ['sku'],
         path: 'me/coffee-ratings/{sku}',
       }),
+
+      emailInvites: pactMethod({
+        method: methodTypes.POST,
+        path: '{user_id}/invite',
+        urlParams: ['user_id'],
+      }),
     };
 
     super({pactAPI, path, methods});
