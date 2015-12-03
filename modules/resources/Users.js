@@ -6,7 +6,7 @@ export default class Users extends PactResource {
   constructor(pactAPI) {
     const path = '/users';
 
-    const includeBasic = ['list'];
+    const includeBasic = ['list', 'retrieve'];
 
     const methods = {
       changePassword: pactMethod({
