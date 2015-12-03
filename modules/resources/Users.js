@@ -6,11 +6,9 @@ export default class Users extends PactResource {
   constructor(pactAPI) {
     const path = '/users';
 
-    const methods = {
-      create: pactMethod({
-        method: methodTypes.POST,
-      }),
+    const includeBasic = ['list', 'retrieve', 'create'];
 
+    const methods = {
       changePassword: pactMethod({
         method: methodTypes.PATCH,
         urlParams: ['user_id'],
@@ -47,6 +45,11 @@ export default class Users extends PactResource {
         path: '{user_id}/cancel',
       }),
 
+      reactivate: pactMethod({
+        method: methodTypes.POST,
+        path: 'me/return',
+      }),
+
       listUniqueCoffees: pactMethod({
         method: methodTypes.GET,
         path: 'me/coffees',
@@ -77,6 +80,6 @@ export default class Users extends PactResource {
       }),
     };
 
-    super({pactAPI, path, methods});
+    super({pactAPI, path, includeBasic, methods});
   }
 }
