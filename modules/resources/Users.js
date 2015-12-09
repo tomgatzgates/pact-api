@@ -27,10 +27,16 @@ export default class Users extends PactResource {
         path: '{user_id}/email',
       }),
 
-      updatePayment: pactMethod({
+      updateCard: pactMethod({
         method: methodTypes.PATCH,
         urlParams: ['user_id'],
         path: '{user_id}/card',
+      }),
+
+      resetDeclinedCard: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['user_id'],
+        path: '{user_id}/card/reset',
       }),
 
       applyVoucher: pactMethod({
