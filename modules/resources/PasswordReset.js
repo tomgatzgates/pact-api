@@ -9,11 +9,11 @@ export default class PasswordReset extends PactResource {
     const methods = {
       sendEmail: pactMethod({
         method: methodTypes.POST,
-        // payload: {email}
+        payloadParams: ['email'],
       }),
       setNewPassword: pactMethod({
         method: methodTypes.PATCH,
-        // payload: {password_reset_token, new_password}
+        payloadParams: ['password_reset_token', 'new_password'],
       }),
     };
 
