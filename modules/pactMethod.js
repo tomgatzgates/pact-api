@@ -31,16 +31,6 @@ export default function pactMethod({
     const urlData = {};
     const queryData = {};
 
-    // Check if the payload contains the required payloadParams
-    payloadParams.forEach(param => {
-      const value = payload[param];
-      if (typeof value === 'undefined') {
-        throw new Error(
-          `PactAPI: I require a payload containing "${param}"}`
-        );
-      }
-    });
-
     // Pull out query params from the payload
     queryParams.forEach(param => {
       const value = payload[param];
@@ -65,6 +55,16 @@ export default function pactMethod({
 
       // Remove it from the payload
       delete payload[param];
+    });
+
+    // Check if the payload contains the required payloadParams
+    payloadParams.forEach(param => {
+      const value = payload[param];
+      if (typeof value === 'undefined') {
+        throw new Error(
+          `PactAPI: I require a payload containing "${param}"}`
+        );
+      }
     });
 
     const resourcePath = this.path;
