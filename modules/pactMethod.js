@@ -23,6 +23,7 @@ export default function pactMethod({
   path = '',
   urlParams = [],
   queryParams = [],
+  payloadParams = [],
 }) {
   const pathGenerator = makeURLInterpolator(path);
 
@@ -30,6 +31,17 @@ export default function pactMethod({
     const urlData = {};
     const queryData = {};
 
+    // Check if the payload contains the required payloadParams
+    payloadParams.forEach(param => {
+      const value = payload[param];
+      if (typeof value === 'undefined') {
+        throw new Error(
+          `PactAPI: I require a payload containing "${param}"}`
+        );
+      }
+    });
+
+    // Pull out query params from the payload
     queryParams.forEach(param => {
       const value = payload[param];
 
@@ -39,7 +51,7 @@ export default function pactMethod({
       }
     });
 
-    // Check to see if we have all the arguments we require
+    // Build the URL and check we have the required urlParams
     urlParams.forEach(param => {
       const required = payload[param];
       if (typeof required === 'undefined' || required === null) {
