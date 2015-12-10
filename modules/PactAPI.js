@@ -1,3 +1,4 @@
+import PasswordReset from './resources/PasswordReset';
 import Recurrables from './resources/Recurrables';
 import OrderItems from './resources/OrderItems';
 import Identities from './resources/Identities';
@@ -12,6 +13,7 @@ import Users from './resources/Users';
 import Ping from './resources/Ping';
 
 const resources = {
+  PasswordReset,
   Recurrables,
   OrderItems,
   Identities,
