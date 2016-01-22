@@ -13,12 +13,12 @@ describe('PactResource', () => {
 
   const sendSpy = sinon.stub().returns(reqMethods);
   const authSpy = sinon.stub().returns(reqMethods);
-  const onSpy = sinon.stub().returns(reqMethods);
+  const useSpy = sinon.stub().returns(reqMethods);
   const endSpy = sinon.stub().returns(reqMethods);
 
   reqMethods.send = sendSpy;
   reqMethods.auth = authSpy;
-  reqMethods.on = onSpy;
+  reqMethods.use = useSpy;
   reqMethods.end = endSpy;
 
   describe('Constructor', () => {
