@@ -41,6 +41,7 @@
   "dependencies": {
     "invariant": "^2.1.0",
     "qs": "^5.2.0",
-    "superagent": "^1.2.0"
+    "superagent": "^1.2.0",
+    "superagent-legacyiesupport": "^1.0.1"
   }
 }

@@ -1,4 +1,5 @@
 import request from 'superagent';
+import lolIE from 'superagent-legacyiesupport';
 
 import pactMethod from './pactMethod';
 import methodTypes from './methodTypes';
@@ -74,6 +75,7 @@ export default class PactResource {
 
     return new Promise((resolve, reject) => {
       const req = request[method](url);
+      req.use(lolIE);
       if (payload) {
         req.send(payload);
       }
