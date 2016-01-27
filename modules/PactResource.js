@@ -1,4 +1,5 @@
 import request from 'superagent';
+import { canUseDOM } from 'exenv';
 import lolIE from 'superagent-legacyiesupport';
 
 import pactMethod from './pactMethod';
@@ -75,7 +76,10 @@ export default class PactResource {
 
     return new Promise((resolve, reject) => {
       const req = request[method](url);
-      req.use(lolIE);
+
+      if (canUseDOM) {
+        req.use(lolIE);
+      }
       if (payload) {
         req.send(payload);
       }
