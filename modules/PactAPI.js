@@ -61,6 +61,9 @@ export default class PactAPI {
       this._api.errorHandler = callback;
     }
   }
+  setRequestTimeout(ms) {
+    this._api.timeout = ms;
+  }
   _prepResources() {
     Object.keys(resources).forEach(name => {
       this[
