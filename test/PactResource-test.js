@@ -14,11 +14,13 @@ describe('PactResource', () => {
   const sendSpy = sinon.stub().returns(reqMethods);
   const authSpy = sinon.stub().returns(reqMethods);
   const useSpy = sinon.stub().returns(reqMethods);
+  const timeoutSpy = sinon.stub().returns(reqMethods);
   const endSpy = sinon.stub().returns(reqMethods);
 
   reqMethods.send = sendSpy;
   reqMethods.auth = authSpy;
   reqMethods.use = useSpy;
+  reqMethods.timeout = timeoutSpy;
   reqMethods.end = endSpy;
 
   describe('Constructor', () => {
@@ -150,6 +152,20 @@ describe('PactResource', () => {
       });
       instance._request('post', '/testPath');
       assert.ok(authSpy.called);
+    });
+
+    it('Uses a request timeout value if there is one', () => {
+      const fakes = {
+        timeout: 3000,
+      };
+      instance = new PactResource({
+        pactAPI: {
+          getAPIField: (key) => fakes[key],
+        },
+        path: mockPath,
+      });
+      instance._request('post', '/testPath');
+      assert.ok(timeoutSpy.called);
     });
 
     it('Calls the error handler if there is one');

@@ -72,11 +72,15 @@ export default class PactResource {
     const version = this._pactAPI.getAPIField('version');
     const token = this._pactAPI.getAPIField('token');
     const errorHandler = this._pactAPI.getAPIField('errorHandler');
+    const timeout = this._pactAPI.getAPIField('timeout');
     const url = `${base}/${version}${path}`;
 
     return new Promise((resolve, reject) => {
       const req = request[method](url);
 
+      if (timeout) {
+        req.timeout(timeout);
+      }
       if (canUseDOM) {
         req.use(lolIE);
       }
