@@ -10,6 +10,7 @@ import Bundles from './resources/Bundles';
 import Orders from './resources/Orders';
 import Token from './resources/Token';
 import Users from './resources/Users';
+import Gifts from './resources/Gifts';
 import Ping from './resources/Ping';
 
 const resources = {
@@ -25,6 +26,7 @@ const resources = {
   Orders,
   Token,
   Users,
+  Gifts,
   Ping,
 };
 

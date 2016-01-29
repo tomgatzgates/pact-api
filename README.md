@@ -81,6 +81,8 @@ pact.tokens
 - identities
   - `create({params})`
   - `update({params})`
+- gifts
+  - `create({params})`
 - validate
   - `password({password})`
   - `address({params})`
