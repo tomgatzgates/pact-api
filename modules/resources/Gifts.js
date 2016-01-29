@@ -7,8 +7,16 @@ export default class Gifts extends PactResource {
     const path = '/gifts';
 
     const methods = {
-      create: pactMethod({
+      purchase: pactMethod({
         method: methodTypes.POST,
+        payloadParams: [
+          'gifter_first_name',
+          'gifter_last_name',
+          'gifter_email',
+          'recipient_name',
+          'payment_amount',
+          'stripe_token',
+        ],
       }),
     };
 
