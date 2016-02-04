@@ -9,8 +9,9 @@ export default class Vouchers extends PactResource {
     const methods = {
       retrieve: pactMethod({
         method: methodTypes.GET,
-        urlParams: ['voucher_code'],
-        path: '{voucher_code}',
+        urlParams: ['code'],
+        queryParams: ['source'],
+        path: '{code}',
       }),
     };
 
