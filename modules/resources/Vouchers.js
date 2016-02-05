@@ -10,7 +10,7 @@ export default class Vouchers extends PactResource {
       retrieve: pactMethod({
         method: methodTypes.GET,
         urlParams: ['code'],
-        queryParams: ['source'],
+        queryParams: ['source'], // account | signup | reactivation
         path: '{code}',
       }),
     };
