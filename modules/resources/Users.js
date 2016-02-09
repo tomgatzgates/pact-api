@@ -42,6 +42,8 @@ export default class Users extends PactResource {
       applyVoucher: pactMethod({
         method: methodTypes.POST,
         urlParams: ['user_id'],
+        queryParams: ['source'],
+        payloadParams: ['code'],
         path: '{user_id}/vouchers',
       }),
 
