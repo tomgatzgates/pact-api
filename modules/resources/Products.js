@@ -38,6 +38,11 @@ export default class Products extends PactResource {
           'per_page',
         ],
       }),
+      coffeeBySlug: pactMethod({
+        method: methodTypes.GET,
+        urlParams: ['slug'],
+        path: 'coffee/{slug}',
+      }),
       retrieve: pactMethod({
         method: methodTypes.GET,
         urlParams: ['sku'],
