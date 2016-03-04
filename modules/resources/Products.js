@@ -10,16 +10,6 @@ export default class Products extends PactResource {
         method: methodTypes.GET,
         queryParams: ['sku', 'available', 'page', 'per_page'],
       }),
-      listBundles: pactMethod({
-        method: methodTypes.GET,
-        path: 'bundle',
-        queryParams: ['sku', 'available', 'page', 'per_page'],
-      }),
-      listHardwares: pactMethod({
-        method: methodTypes.GET,
-        path: 'hardware',
-        queryParams: ['sku', 'available', 'page', 'per_page'],
-      }),
       listCoffees: pactMethod({
         method: methodTypes.GET,
         path: 'coffee',
@@ -30,10 +20,6 @@ export default class Products extends PactResource {
           'best_for',
           'decaf',
           'limited',
-          'origin',
-          'producer',
-          'varietal',
-          'altitude',
           'page',
           'per_page',
         ],
