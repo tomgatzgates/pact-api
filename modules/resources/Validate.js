@@ -11,10 +11,6 @@ export default class Validate extends PactResource {
         method: methodTypes.POST,
         path: 'password',
       }),
-      address: pactMethod({
-        method: methodTypes.POST,
-        path: 'address',
-      }),
     };
 
     super({pactAPI, path, methods});
