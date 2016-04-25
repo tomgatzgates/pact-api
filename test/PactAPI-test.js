@@ -80,7 +80,6 @@ describe('PactAPI', () => {
     it('Exist on the instance', () => {
       [
         'addresses',
-        'bundles',
         'identities',
         'orderItems',
         'orders',

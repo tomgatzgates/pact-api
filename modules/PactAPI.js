@@ -6,7 +6,6 @@ import Addresses from './resources/Addresses';
 import Vouchers from './resources/Vouchers';
 import Products from './resources/Products';
 import Validate from './resources/Validate';
-import Bundles from './resources/Bundles';
 import Orders from './resources/Orders';
 import Token from './resources/Token';
 import Users from './resources/Users';
@@ -22,7 +21,6 @@ const resources = {
   Vouchers,
   Products,
   Validate,
-  Bundles,
   Orders,
   Token,
   Users,

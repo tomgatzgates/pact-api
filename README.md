@@ -44,16 +44,12 @@ pact.tokens
 
 ### Available resources & methods
 
-- bundles
-  - `list()`
-  - `retrieve(sku)`
 - token
   - `create()`
   - `del()`
 - products
   - `list({queryParams})`
   - `listCoffees({queryParams})`
-  - `listBundles({queryParams})`
   - `listHardwares({queryParams})`
   - `retrieve(sku)`
 - users
