@@ -23,6 +23,12 @@ export default class Orders extends PactResource {
           'order',
         ],
       }),
+
+      skip: pactMethod({
+        method: methodTypes.PATCH,
+        urlParams: ['id'],
+        path: '{id}/skip',
+      }),
     };
 
     super({pactAPI, path, includeBasic, methods});
