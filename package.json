@@ -6,6 +6,7 @@
   "scripts": {
     "build": "scripts/build.sh",
     "prepublish": "npm run build",
+    "lint": "eslint modules",
     "test": "eslint modules && karma start"
   },
   "repository": {
@@ -13,16 +14,16 @@
     "url": "git@github.com:PactCoffee/pact-api.git"
   },
   "devDependencies": {
-    "babel": "^5.8.19",
-    "babel-eslint": "^4.1.1",
-    "babel-runtime": "^5.8.20",
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^6.0.4",
+    "babel-cli": "^6.8.0",
     "babelify": "^6.3.0",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
-    "eslint": "^0.24.1",
-    "eslint-config-airbnb": "0.0.8",
-    "eslint-plugin-mocha": "^0.5.1",
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb-base": "3.0.1",
+    "eslint-plugin-mocha": "^2.2.0",
     "karma": "^0.13.9",
     "karma-browserify": "^4.3.0",
     "karma-chai": "^0.1.0",
