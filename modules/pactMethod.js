@@ -17,7 +17,18 @@ function buildURL(base, path, queryObj) {
   return fullPath;
 }
 
-// This fn to be used from inside a PactResource class/subclass only
+/**
+ * This class sets up the requirements for a request: payload, URL etc.
+ *
+ * Returns a request wrapper
+ *
+ * @param  {string} method The request method
+ * @param  {String} path  The request URL
+ * @param  {Array} urlParams Normally a resouce id eg. /orders/:id
+ * @param  {Array} queryParams GET parameters
+ * @param  {Array} payloadParams POST body parameters
+ * @return {function} MakeRequest wrapper function
+ */
 export default function pactMethod({
   method = methodTypes.GET,
   path = '',
