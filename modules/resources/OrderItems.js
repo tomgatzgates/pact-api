@@ -17,21 +17,9 @@ export default class OrderItems extends PactResource {
         urlParams: ['orderId', 'id'],
         path: '{orderId}/items/{id}',
       }),
-      // Create a record
-      create: pactMethod({
-        method: methodTypes.POST,
-        urlParams: ['orderId'],
-        path: '{orderId}/items',
-      }),
       // Update an existing record
       update: pactMethod({
         method: methodTypes.PATCH,
-        urlParams: ['orderId', 'id'],
-        path: '{orderId}/items/{id}',
-      }),
-      // Delete a record
-      del: pactMethod({
-        method: methodTypes.DELETE,
         urlParams: ['orderId', 'id'],
         path: '{orderId}/items/{id}',
       }),
