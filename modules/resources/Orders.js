@@ -29,6 +29,11 @@ export default class Orders extends PactResource {
         urlParams: ['id'],
         path: '{id}/skip',
       }),
+
+      house_coffee: pactMethod({
+        method: methodTypes.POST,
+        path: '/house_coffee'
+      }),
     };
 
     super({pactAPI, path, includeBasic, methods});
