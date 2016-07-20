@@ -54,6 +54,7 @@ pact.tokens
   - `retrieve(sku)`
 - users
   - `create({params})`
+  - `start()`
 - addresses
   - `list()`
   - `create({params})`

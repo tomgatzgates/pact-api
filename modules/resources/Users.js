@@ -86,6 +86,11 @@ export default class Users extends PactResource {
         path: '{user_id}/invite',
         urlParams: ['user_id'],
       }),
+
+      start: pactMethod({
+        method: methodTypes.GET,
+        path: 'me/start',
+      }),
     };
 
     super({pactAPI, path, includeBasic, methods});
