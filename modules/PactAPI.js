@@ -12,6 +12,7 @@ import Users from './resources/Users';
 import Gifts from './resources/Gifts';
 import Ping from './resources/Ping';
 import Commands from './resources/Commands';
+import Discourse from './resources/Discourse';
 
 const resources = {
   PasswordReset,
@@ -28,6 +29,7 @@ const resources = {
   Gifts,
   Ping,
   Commands,
+  Discourse,
 };
 
 /**
