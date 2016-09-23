@@ -1,35 +1,37 @@
-import PasswordReset from './resources/PasswordReset';
-import Recurrables from './resources/Recurrables';
-import OrderItems from './resources/OrderItems';
-import Identities from './resources/Identities';
 import Addresses from './resources/Addresses';
-import Vouchers from './resources/Vouchers';
-import Products from './resources/Products';
-import Validate from './resources/Validate';
-import Orders from './resources/Orders';
-import Token from './resources/Token';
-import Users from './resources/Users';
-import Gifts from './resources/Gifts';
-import Ping from './resources/Ping';
+import Baskets from './resources/Baskets';
 import Commands from './resources/Commands';
 import Discourse from './resources/Discourse';
+import Gifts from './resources/Gifts';
+import Identities from './resources/Identities';
+import OrderItems from './resources/OrderItems';
+import Orders from './resources/Orders';
+import PasswordReset from './resources/PasswordReset';
+import Ping from './resources/Ping';
+import Products from './resources/Products';
+import Recurrables from './resources/Recurrables';
+import Token from './resources/Token';
+import Users from './resources/Users';
+import Validate from './resources/Validate';
+import Vouchers from './resources/Vouchers';
 
 const resources = {
-  PasswordReset,
-  Recurrables,
-  OrderItems,
-  Identities,
   Addresses,
-  Vouchers,
-  Products,
-  Validate,
-  Orders,
-  Token,
-  Users,
-  Gifts,
-  Ping,
+  Baskets,
   Commands,
   Discourse,
+  Gifts,
+  Identities,
+  OrderItems,
+  Orders,
+  PasswordReset,
+  Ping,
+  Products,
+  Recurrables,
+  Token,
+  Users,
+  Validate,
+  Vouchers,
 };
 
 /**
