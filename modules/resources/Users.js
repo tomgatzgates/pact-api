@@ -58,6 +58,11 @@ export default class Users extends PactResource {
         path: 'me/return',
       }),
 
+      contact: pactMethod({
+        method: methodTypes.POST,
+        path: 'me/contact',
+      }),
+
       listUniqueCoffees: pactMethod({
         method: methodTypes.GET,
         path: 'me/coffees',
