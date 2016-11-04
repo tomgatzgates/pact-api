@@ -1,6 +1,4 @@
 import PactResource from '../PactResource';
-import pactMethod from '../pactMethod';
-import methodTypes from '../methodTypes';
 
 export default class UserFlags extends PactResource {
   constructor(pactAPI) {

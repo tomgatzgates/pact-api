@@ -32,7 +32,7 @@ export default class Orders extends PactResource {
 
       house_coffee: pactMethod({
         method: methodTypes.POST,
-        path: '/house_coffee'
+        path: '/house_coffee',
       }),
     };
 

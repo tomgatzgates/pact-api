@@ -34,6 +34,11 @@ export default class Products extends PactResource {
         urlParams: ['sku'],
         path: '{sku}',
       }),
+      preorder: pactMethod({
+        method: methodTypes.POST,
+        urlParams: ['slug'],
+        path: '{slug}/preorder',
+      }),
     };
 
     super({pactAPI, path, methods});
