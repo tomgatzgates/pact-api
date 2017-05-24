@@ -1,6 +1,7 @@
 import Addresses from './resources/Addresses';
 import Baskets from './resources/Baskets';
 import Commands from './resources/Commands';
+import Credits from './resources/Credits';
 import Discourse from './resources/Discourse';
 import Gifts from './resources/Gifts';
 import Identities from './resources/Identities';
@@ -19,6 +20,7 @@ const resources = {
   Addresses,
   Baskets,
   Commands,
+  Credits,
   Discourse,
   Gifts,
   Identities,
