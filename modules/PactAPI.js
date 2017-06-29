@@ -1,5 +1,6 @@
 import Addresses from './resources/Addresses';
 import Baskets from './resources/Baskets';
+import CoffeeLines from './resources/CoffeeLines';
 import Commands from './resources/Commands';
 import Credits from './resources/Credits';
 import Discourse from './resources/Discourse';
@@ -19,6 +20,7 @@ import Vouchers from './resources/Vouchers';
 const resources = {
   Addresses,
   Baskets,
+  CoffeeLines,
   Commands,
   Credits,
   Discourse,
